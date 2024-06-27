@@ -1,1 +1,36 @@
+:root {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
 
+#app {
+  width: 100%;
+  max-width: 250px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 5px 0px;
+  background-color: transparent;
+  border: 2px solid black;
+  font-size: 20px;
+}
