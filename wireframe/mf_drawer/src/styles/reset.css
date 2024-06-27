@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html,
 body,
 div,
@@ -101,8 +107,10 @@ nav {
 }
 body {
   line-height: 1;
-  width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+}
+html {
+  height: 100%;
 }
 ol,
 ul {
