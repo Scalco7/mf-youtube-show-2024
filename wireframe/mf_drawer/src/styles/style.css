@@ -35,3 +35,7 @@ button {
   font-size: 20px;
   cursor: pointer;
 }
+
+.current {
+  background: rgb(255, 234, 0);
+}

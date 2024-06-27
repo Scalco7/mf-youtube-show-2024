@@ -13,3 +13,13 @@ videoButton!.addEventListener('click', () => {
 favoriteButton!.addEventListener('click', () => {
   navigateTo('favoritos')
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+  const route = getRoute()
+
+  if (route == '/videos') {
+    videoButton?.classList.add('current')
+  } else if (route == '/favoritos') {
+    favoriteButton?.classList.add('current')
+  }
+})
