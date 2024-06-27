@@ -10,3 +10,4 @@ Hoje eu comecei o projeto. Acordei as 3 da manhã (parece loucura né, mas eu ad
 
 Logo depois, comecei a por a mão no código e fiz a implementação do mf_drawer, uma implementação inicial, depois vão ser adicionados mais recursos.
 Esse é o plano, fazer tudo funcionar direitinho e depois lapidar.
+Amanhã pretendo fazer a API e pelo menos 1 BFF
