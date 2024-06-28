@@ -9,12 +9,10 @@ export class Favorite extends Model<InferAttributes<Favorite>, InferCreationAttr
 Favorite.init({
     user_id: {
         type: DataTypes.STRING,
-        primaryKey: true,
         allowNull: false,
     },
     video_id: {
         type: DataTypes.STRING,
-        primaryKey: true,
         allowNull: false,
     },
 }, { sequelize, modelName: 'favorite' })
