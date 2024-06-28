@@ -12,10 +12,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/node": "^20.14.9",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.2"
   }
