@@ -10,7 +10,8 @@ export class UserService {
 
         try {
             checkUser = await User.findOne({
-                where: { email: email }
+                where: { email: email },
+                attributes: ['id']
             })
         } catch (e) {
             throw 'não conseguiu checar usuário'
