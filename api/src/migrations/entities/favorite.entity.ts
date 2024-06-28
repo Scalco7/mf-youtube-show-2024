@@ -4,7 +4,6 @@ import { sequelize } from "../../database/database";
 class Favorite extends Model<InferAttributes<Favorite>, InferCreationAttributes<Favorite>> {
     declare user_id: number;
     declare video_id: string;
-    declare created_at: Date;
 }
 
 Favorite.init({
@@ -18,9 +17,4 @@ Favorite.init({
         primaryKey: true,
         allowNull: false,
     },
-    created_at: {
-        type: DataTypes.DATE,
-        primaryKey: false,
-        allowNull: false,
-    }
 }, { sequelize, modelName: 'favorite' })
