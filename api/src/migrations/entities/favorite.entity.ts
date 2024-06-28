@@ -1,7 +1,7 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
 import { sequelize } from "../../database/database";
 
-class Favorite extends Model<InferAttributes<Favorite>, InferCreationAttributes<Favorite>> {
+export class Favorite extends Model<InferAttributes<Favorite>, InferCreationAttributes<Favorite>> {
     declare user_id: number;
     declare video_id: string;
 }
