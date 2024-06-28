@@ -7,10 +7,12 @@ import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { FavoriteService } from './services/favorite.service';
 import dotenv from 'dotenv'
+import { UserController } from './controllers/user.controller';
 
 dotenv.config()
 const app = express()
 const route = Router()
+const userController = new UserController()
 const userService = new UserService()
 const authService = new AuthService()
 const favoriteService = new FavoriteService()
@@ -67,8 +69,13 @@ route.delete('/remove-favorite', async (req: Request, res: Response) => {
 })
 
 route.post('/user', async (req: Request, res: Response) => {
-    const user = await userService.create(req.body.name, req.body.email, req.body.password)
-    res.json(user);
+    try {
+        const user = await userController.createUser(req.body)
+        res.json({ status: 200, data: user });
+    }
+    catch (error) {
+        res.json({ status: 400, error: error })
+    }
 })
 
 
