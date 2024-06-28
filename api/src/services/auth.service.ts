@@ -19,7 +19,7 @@ export class AuthService {
         if (!(await compare(password, dbUserData.password)))
             throw 'Conta inválida'
 
-        const token = sign({ id: dbUserData.id, name: dbUserData.name }, 'secret-key', { expiresIn: '2h' })
+        const token = sign({ id: dbUserData.id, name: dbUserData.name }, process.env.JWT_SECRET_KEY!.toString(), { expiresIn: '2h' })
         return token
     }
 }

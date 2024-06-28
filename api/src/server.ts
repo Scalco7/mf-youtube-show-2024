@@ -6,7 +6,9 @@ import { migrate } from './migrations/migrate';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { FavoriteService } from './services/favorite.service';
+import dotenv from 'dotenv'
 
+dotenv.config()
 const app = express()
 const route = Router()
 const userService = new UserService()
@@ -71,7 +73,4 @@ route.post('/user', async (req: Request, res: Response) => {
 
 
 app.use(route)
-
-const PORT = 3030
-
-app.listen(PORT, () => console.log("heyy, api is listen on port: " + PORT))
+app.listen(process.env.PORT, () => console.log("heyy, api is listen on port: " + process.env.PORT))
