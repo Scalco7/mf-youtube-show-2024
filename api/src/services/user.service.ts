@@ -1,5 +1,6 @@
 import { User } from "../migrations/entities/user.entity";
 import { hash } from 'bcrypt'
+import { randomUUID } from "crypto";
 
 const hashSalts = 10
 
@@ -21,9 +22,8 @@ export class UserService {
 
         try {
             const hashedPassword = await hash(password, hashSalts)
-            console.log(hashedPassword)
-
-            const newUser = await User.create({ name, email, password: hashedPassword })
+            const id = randomUUID();
+            const newUser = await User.create({ id, name, email, password: hashedPassword })
             return newUser
         } catch (error) {
             throw 'erro criando o usuário'

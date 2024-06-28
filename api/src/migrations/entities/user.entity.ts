@@ -2,7 +2,7 @@ import { DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequ
 import { sequelize } from "../../database/database";
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-    declare id: number
+    declare id: string
     declare name: string;
     declare email: string;
     declare password: string;
@@ -10,10 +10,9 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
 
 User.init({
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
     },
     name: {
         type: DataTypes.STRING,

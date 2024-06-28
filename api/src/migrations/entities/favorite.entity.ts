@@ -2,13 +2,13 @@ import { DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequ
 import { sequelize } from "../../database/database";
 
 export class Favorite extends Model<InferAttributes<Favorite>, InferCreationAttributes<Favorite>> {
-    declare user_id: number;
+    declare user_id: string;
     declare video_id: string;
 }
 
 Favorite.init({
     user_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
         allowNull: false,
     },
