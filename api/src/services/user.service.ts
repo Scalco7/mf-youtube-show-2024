@@ -29,4 +29,22 @@ export class UserService {
             throw 'erro criando o usuário'
         }
     }
+
+    async getUserNameById(id: string): Promise<string> {
+        let name;
+
+        try {
+            const userQuery = await User.findOne({ where: { id: id }, attributes: ['name'] })
+            name = userQuery?.dataValues.name
+        }
+        catch (error) {
+            throw error
+        }
+
+        if (!name) {
+            throw 'user does not exists'
+        }
+
+        return name
+    }
 }
