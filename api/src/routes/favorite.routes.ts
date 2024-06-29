@@ -1,8 +1,11 @@
 import { Router, Request, Response } from "express"
 import { FavoriteController } from "../controllers/favorite.controller"
+import { bearerAuthentication } from "../middleware/middleware"
 
 const favoriteController = new FavoriteController()
 export const favoriteRoute = Router()
+
+favoriteRoute.use('/', bearerAuthentication)
 
 favoriteRoute.get('/:userId', async (req: Request, res: Response) => {
     try {
