@@ -1,20 +1,11 @@
-import Joi from "joi";
 import { Favorite } from "../migrations/entities/favorite.entity";
 import { FavoriteService } from "../services/favorite.service";
+import { favoriteDataValidator, listFavoritesDataValidator } from "../validators/favorite.validators";
 
 interface IFavoriteVideoData {
     userId: string
     videoId: string
 }
-
-const favoriteDataObjectValidator = Joi.object({
-    userId: Joi.string().required(),
-    videoId: Joi.string().required()
-})
-
-const listFavoritesDataObjectValidator = Joi.object({
-    userId: Joi.string().required(),
-})
 
 export class FavoriteController {
     private favoriteService: FavoriteService
@@ -24,7 +15,7 @@ export class FavoriteController {
     }
 
     public async addFavoriteVideo(data: IFavoriteVideoData): Promise<Favorite> {
-        const { error } = favoriteDataObjectValidator.validate(data)
+        const { error } = favoriteDataValidator.validate(data)
 
         if (error)
             throw ('dados inválidos - ' + error)
@@ -34,7 +25,7 @@ export class FavoriteController {
     }
 
     public async removeFavoriteVideo(data: IFavoriteVideoData): Promise<void> {
-        const { error } = favoriteDataObjectValidator.validate(data)
+        const { error } = favoriteDataValidator.validate(data)
 
         if (error)
             throw ('dados inválidos - ' + error)
@@ -43,7 +34,7 @@ export class FavoriteController {
     }
 
     public async listFavoriteByUserId(data: { userId: string }): Promise<string[]> {
-        const { error } = listFavoritesDataObjectValidator.validate(data)
+        const { error } = listFavoritesDataValidator.validate(data)
 
         if (error)
             throw ('dados inválidos - ' + error)

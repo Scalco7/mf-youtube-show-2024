@@ -1,15 +1,10 @@
-import Joi from "joi";
 import { AuthService } from "../services/auth.service";
+import { ILogiDataValidator } from "../validators/auth.validators";
 
 interface ILoginData {
     email: string
     password: string
 }
-
-const ILogiDataValidator = Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().required().min(6)
-})
 
 export class AuthController {
     private authService: AuthService
