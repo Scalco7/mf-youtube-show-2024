@@ -5,7 +5,7 @@ import { randomUUID } from "crypto";
 const hashSalts = 10
 
 export class UserService {
-    async create(name: string, email: string, password: string): Promise<User> {
+    public async create(name: string, email: string, password: string): Promise<User> {
         let checkUser;
 
         try {
@@ -31,7 +31,7 @@ export class UserService {
         }
     }
 
-    async getUserNameById(id: string): Promise<string> {
+    public async getUserNameById(id: string): Promise<string> {
         let name;
 
         try {

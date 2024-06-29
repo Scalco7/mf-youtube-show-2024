@@ -1,11 +1,11 @@
 import { Favorite } from "../migrations/entities/favorite.entity";
 
 export class FavoriteService {
-    async addFavoriteVideo(userId: string, videoId: string): Promise<Favorite> {
+    public async addFavoriteVideo(userId: string, videoId: string): Promise<Favorite> {
         return Favorite.create({ user_id: userId, video_id: videoId })
     }
 
-    async removeFavoriteVideo(userId: string, videoId: string): Promise<void> {
+    public async removeFavoriteVideo(userId: string, videoId: string): Promise<void> {
         let favorite
         try {
             favorite = await Favorite.findOne({ where: { user_id: userId, video_id: videoId } })
@@ -19,7 +19,7 @@ export class FavoriteService {
         return favorite.destroy()
     }
 
-    async listFavoriteByUserId(userId: string): Promise<string[]> {
+    public async listFavoriteByUserId(userId: string): Promise<string[]> {
         let favoriteList: string[] = [];
 
         try {

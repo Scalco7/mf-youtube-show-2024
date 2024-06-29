@@ -3,7 +3,7 @@ import { User } from "../migrations/entities/user.entity";
 import { sign } from "jsonwebtoken";
 
 export class AuthService {
-    async login(email: string, password: string): Promise<string> {
+    public async login(email: string, password: string): Promise<string> {
         let dbUserData;
 
         try {
