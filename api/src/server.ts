@@ -3,19 +3,17 @@ import { Router, Request, Response } from 'express'
 
 import { User } from './migrations/entities/user.entity';
 import { migrate } from './migrations/migrate';
-import { UserService } from './services/user.service';
-import { AuthService } from './services/auth.service';
-import { FavoriteService } from './services/favorite.service';
 import dotenv from 'dotenv'
 import { UserController } from './controllers/user.controller';
+import { AuthController } from './controllers/auth.controller';
+import { FavoriteController } from './controllers/favorite.controller';
 
 dotenv.config()
 const app = express()
 const route = Router()
 const userController = new UserController()
-const userService = new UserService()
-const authService = new AuthService()
-const favoriteService = new FavoriteService()
+const authController = new AuthController()
+const favoriteController = new FavoriteController()
 
 migrate()
 
@@ -27,45 +25,35 @@ route.get('/', (req: Request, res: Response) => {
 
 route.get('/users', async (req: Request, res: Response) => {
     const users = await User.findAll()
-    const userId = users[0].dataValues.id
-
-    try {
-        console.log(await userService.getUserNameById(userId))
-        console.log(await authService.login('rafael12345@gmail.com', '123456'))
-
-        console.log(await favoriteService.listFavoriteByUserId(userId))
-    }
-    catch (err) {
-        console.log("erro - ", err)
-    }
-
     res.json({ users: users })
 })
 
-route.post('/add-favorite', async (req: Request, res: Response) => {
-    const users = await User.findAll()
-    const userId = users[0].dataValues.id
-
+route.get('/favorites/:userId', async (req: Request, res: Response) => {
     try {
-        await favoriteService.addFavoriteVideo(userId, req.body.video_id)
-    } catch (err) {
-        console.log("erro - ", err)
+        const userId = req.params.userId
+        const favoriteList = await favoriteController.listFavoriteByUserId({ userId })
+        res.json({ status: 200, favorites: favoriteList })
+    } catch (error) {
+        res.json({ status: 400, error: error })
     }
-
-    res.json({ favorites: await favoriteService.listFavoriteByUserId(userId) })
 })
 
-route.delete('/remove-favorite', async (req: Request, res: Response) => {
-    const users = await User.findAll()
-    const userId = users[0].dataValues.id
-
+route.post('/favorites/add', async (req: Request, res: Response) => {
     try {
-        await favoriteService.removeFavoriteVideo(userId, req.body.video_id)
-    } catch (err) {
-        console.log("erro - ", err)
+        await favoriteController.addFavoriteVideo(req.body)
+        res.json({ status: 200 })
+    } catch (error) {
+        res.json({ status: 400, error: error })
     }
+})
 
-    res.json({ favorites: await favoriteService.listFavoriteByUserId(userId) })
+route.delete('/favorites/remove', async (req: Request, res: Response) => {
+    try {
+        await favoriteController.removeFavoriteVideo(req.body)
+        res.json({ status: 200 })
+    } catch (error) {
+        res.json({ status: 400, error: error })
+    }
 })
 
 route.post('/user', async (req: Request, res: Response) => {
