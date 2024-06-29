@@ -5,6 +5,7 @@ import { migrate } from './migrations/migrate';
 import dotenv from 'dotenv'
 import { userRoute } from './routes/user.routes';
 import { favoriteRoute } from './routes/favorite.routes';
+import { authRoute } from './routes/auth.routes';
 
 dotenv.config()
 const app = express()
@@ -18,6 +19,7 @@ route.get('/', (req: Request, res: Response) => {
     res.json({ message: 'Hello World' })
 })
 
+app.use('/auth', authRoute)
 app.use('/users', userRoute)
 app.use('/favorites', favoriteRoute)
 app.use(route)
