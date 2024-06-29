@@ -18,7 +18,7 @@ export class FavoriteController {
         const { error } = favoriteDataValidator.validate(data)
 
         if (error)
-            throw ('dados inválidos - ' + error)
+            throw (error.message)
 
         const favorite = await this.favoriteService.addFavoriteVideo(data.userId, data.videoId)
         return favorite
@@ -28,7 +28,7 @@ export class FavoriteController {
         const { error } = favoriteDataValidator.validate(data)
 
         if (error)
-            throw ('dados inválidos - ' + error)
+            throw (error.message)
 
         await this.favoriteService.removeFavoriteVideo(data.userId, data.videoId)
     }
@@ -37,7 +37,7 @@ export class FavoriteController {
         const { error } = listFavoritesDataValidator.validate(data)
 
         if (error)
-            throw ('dados inválidos - ' + error)
+            throw (error.message)
 
         const favoriteList = await this.favoriteService.listFavoriteByUserId(data.userId)
         return favoriteList

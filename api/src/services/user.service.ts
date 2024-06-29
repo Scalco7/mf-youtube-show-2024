@@ -13,7 +13,7 @@ export class UserService {
                 where: { email: email },
                 attributes: ['id']
             })
-        } catch (e) {
+        } catch (error) {
             throw 'não conseguiu checar usuário'
         }
 

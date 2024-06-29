@@ -19,7 +19,7 @@ export class UserController {
         const { error } = userDataValidator.validate(user)
 
         if (error)
-            throw ('dados inválidos - ' + error)
+            throw (error.message)
 
         const newUser = await this.userService.create(user.name, user.email, user.password)
         return newUser

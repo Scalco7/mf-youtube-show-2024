@@ -9,7 +9,7 @@ export class FavoriteService {
         let favorite
         try {
             favorite = await Favorite.findOne({ where: { user_id: userId, video_id: videoId } })
-        } catch (err) {
+        } catch (error) {
             throw 'Erro buscando video favorito'
         }
 

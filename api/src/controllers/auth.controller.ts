@@ -17,7 +17,7 @@ export class AuthController {
         const { error } = ILogiDataValidator.validate(data)
 
         if (error)
-            throw ('dados inválidos - ' + error)
+            throw (error.message)
 
         const token = await this.authService.login(data.email, data.password)
         return token

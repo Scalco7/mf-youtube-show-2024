@@ -10,7 +10,7 @@ export class AuthService {
             const dbUserQuery = await User.findOne({ where: { email: email }, attributes: ["id", "name", "password"] })
             dbUserData = dbUserQuery?.dataValues
         }
-        catch (e) {
+        catch (error) {
             throw 'erro no banco de dados'
         }
 
