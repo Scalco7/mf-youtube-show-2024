@@ -1,18 +1,14 @@
 import express from 'express'
 import { Router, Request, Response } from 'express'
 
-import { User } from './migrations/entities/user.entity';
 import { migrate } from './migrations/migrate';
 import dotenv from 'dotenv'
-import { UserController } from './controllers/user.controller';
-import { AuthController } from './controllers/auth.controller';
 import { FavoriteController } from './controllers/favorite.controller';
+import { userRoute } from './routes/user.routes';
 
 dotenv.config()
 const app = express()
 const route = Router()
-const userController = new UserController()
-const authController = new AuthController()
 const favoriteController = new FavoriteController()
 
 migrate()
@@ -21,11 +17,6 @@ app.use(express.json())
 
 route.get('/', (req: Request, res: Response) => {
     res.json({ message: 'Hello World' })
-})
-
-route.get('/users', async (req: Request, res: Response) => {
-    const users = await User.findAll()
-    res.json({ users: users })
 })
 
 route.get('/favorites/:userId', async (req: Request, res: Response) => {
@@ -56,16 +47,6 @@ route.delete('/favorites/remove', async (req: Request, res: Response) => {
     }
 })
 
-route.post('/user', async (req: Request, res: Response) => {
-    try {
-        const user = await userController.createUser(req.body)
-        res.json({ status: 200, data: user });
-    }
-    catch (error) {
-        res.json({ status: 400, error: error })
-    }
-})
-
-
+app.use('/users', userRoute)
 app.use(route)
 app.listen(process.env.PORT, () => console.log("heyy, api is listen on port: " + process.env.PORT))
