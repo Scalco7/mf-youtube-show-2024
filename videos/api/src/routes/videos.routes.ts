@@ -7,7 +7,7 @@ export const videosRoute = Router()
 
 videosRoute.get('/list', async (req: Request, res: Response) => {
     try {
-        const videos = videosController.searchYoutubeVideos(req.body)
+        const videos = await videosController.searchYoutubeVideos(req.body)
         res.json({ status: 200, videos: videos })
     }
     catch (error) {
