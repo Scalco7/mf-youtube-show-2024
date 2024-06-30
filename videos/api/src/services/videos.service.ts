@@ -1,13 +1,6 @@
 import axios from "axios"
-import { IThumbnailsData, IYoutubeVideoListData } from "../types/youtubeData";
-
-interface IListVideosResponse {
-    videoId: string
-    title: string
-    description: string
-    thumbnail: IThumbnailsData
-    favorite: boolean
-}
+import { IYoutubeVideoListData } from "../types/youtubeData";
+import { IListVideosResponse } from "../types/listVideosResponse";
 
 export class VideosService {
     public async searchYoutubeVideos(userId: string, videoTitle: string): Promise<IListVideosResponse[]> {
