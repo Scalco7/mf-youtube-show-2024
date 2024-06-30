@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { VideosController } from "../controllers/videos.controller";
+import { VideosController } from "../controllers/video.controller";
 import { verify } from "jsonwebtoken";
 import { ITokenData, bearerAuthentication } from "../middleware/middleware";
 

@@ -1,6 +1,6 @@
 import express, { Router, Request, Response } from "express";
 import dotenv from 'dotenv'
-import { videosRoute } from "./routes/videos.routes";
+import { videosRoute } from "./routes/video.routes";
 
 dotenv.config()
 
