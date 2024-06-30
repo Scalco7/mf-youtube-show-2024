@@ -1,21 +1,21 @@
 import axios from "axios"
 import { IYoutubeVideoListData } from "../types/youtubeData";
 import { IListVideosResponse } from "../types/listVideosResponse";
+import { FavoriteService } from "./favorite.service";
 
 export class VideosService {
+    private favoriteService: FavoriteService
+
+    constructor() {
+        this.favoriteService = new FavoriteService()
+    }
+
     public async searchYoutubeVideos(userId: string, videoTitle: string): Promise<IListVideosResponse[]> {
         let favoritesList: string[];
         let videosList: IYoutubeVideoListData;
 
         try {
-            const apiUrl = `${process.env.API_URL}/favorites/${userId}`
-            const request = await axios.get(apiUrl, {
-                headers: {
-                    'Authorization': 'Bearer ' + process.env.API_KEY
-                }
-            })
-
-            favoritesList = request.data.favorites
+            favoritesList = await this.favoriteService.listFavoriteVideosByUserId(userId)
         } catch (error) {
             throw (error)
         }

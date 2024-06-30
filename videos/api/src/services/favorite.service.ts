@@ -1,5 +1,7 @@
+import axios from "axios"
+
 export class FavoriteService {
-    public listFavoriteVideosByUserId() {
+    public async listFavoriteVideosByUserId(userId: string): Promise<string[]> {
         try {
             const apiUrl = `${process.env.API_URL}/favorites/${userId}`
             const request = await axios.get(apiUrl, {
@@ -8,7 +10,7 @@ export class FavoriteService {
                 }
             })
 
-            favoritesList = request.data.favorites
+            return request.data.favorites
         } catch (error) {
             throw (error)
         }
