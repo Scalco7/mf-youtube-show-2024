@@ -1,5 +1,5 @@
 import Joi from "joi"
-import { VideosService } from "../services/video.service"
+import { VideoService } from "../services/video.service"
 import { IListVideosResponse } from "../types/listVideosResponse"
 
 interface ISearchYoutubeVideosData {
@@ -8,10 +8,10 @@ interface ISearchYoutubeVideosData {
 }
 
 export class VideosController {
-    private service: VideosService
+    private VideoService: VideoService
 
     constructor() {
-        this.service = new VideosService()
+        this.VideoService = new VideoService()
     }
 
     public async searchYoutubeVideos(data: ISearchYoutubeVideosData): Promise<IListVideosResponse[]> {
@@ -21,7 +21,7 @@ export class VideosController {
             throw (error)
         }
 
-        const videosList = await this.service.searchYoutubeVideos(data.userId, data.videoTitle)
+        const videosList = await this.VideoService.searchYoutubeVideos(data.userId, data.videoTitle)
         return videosList
     }
 }

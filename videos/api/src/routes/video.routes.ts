@@ -3,18 +3,18 @@ import { VideosController } from "../controllers/video.controller";
 import { verify } from "jsonwebtoken";
 import { ITokenData, bearerAuthentication } from "../middleware/middleware";
 
-const videosController = new VideosController()
+const videoController = new VideosController()
 
-export const videosRoute = Router()
+export const videoRoute = Router()
 
-videosRoute.use('/', bearerAuthentication)
+videoRoute.use('/', bearerAuthentication)
 
-videosRoute.get('/list/', async (req: Request, res: Response) => {
+videoRoute.get('/list/', async (req: Request, res: Response) => {
     try {
         const token = req.header('Authorization')?.replace('Bearer ', '') ?? ''
         const decoded = verify(token, process.env.JWT_SECRET_KEY!.toString()) as any as ITokenData
         const videoTitle = req.query.title as string
-        const videos = await videosController.searchYoutubeVideos({ userId: decoded.id, videoTitle })
+        const videos = await videoController.searchYoutubeVideos({ userId: decoded.id, videoTitle })
         res.json({ status: 200, videos: videos })
     }
     catch (error) {

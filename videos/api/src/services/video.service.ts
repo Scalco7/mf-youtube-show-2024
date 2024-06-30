@@ -3,7 +3,7 @@ import { IYoutubeVideoListData } from "../types/youtubeData";
 import { IListVideosResponse } from "../types/listVideosResponse";
 import { FavoriteService } from "./favorite.service";
 
-export class VideosService {
+export class VideoService {
     private favoriteService: FavoriteService
 
     constructor() {
