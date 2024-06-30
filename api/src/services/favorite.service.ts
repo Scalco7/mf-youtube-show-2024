@@ -2,6 +2,17 @@ import { Favorite } from "../migrations/entities/favorite.entity";
 
 export class FavoriteService {
     public async addFavoriteVideo(userId: string, videoId: string): Promise<Favorite> {
+        let favorite
+        try {
+            favorite = await Favorite.findOne({ where: { user_id: userId, video_id: videoId } })
+        } catch (error) {
+            throw 'Erro buscando video favorito'
+        }
+
+        if (favorite)
+            throw 'Video favorito já existe'
+
+
         return Favorite.create({ user_id: userId, video_id: videoId })
     }
 
