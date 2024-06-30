@@ -1,5 +1,6 @@
 import Joi from "joi"
 import { VideosService } from "../services/videos.service"
+import { IListVideosResponse } from "../types/listVideosResponse"
 
 interface ISearchYoutubeVideosData {
     userId: string
@@ -13,7 +14,7 @@ export class VideosController {
         this.service = new VideosService()
     }
 
-    public async searchYoutubeVideos(data: ISearchYoutubeVideosData): Promise<any[]> {
+    public async searchYoutubeVideos(data: ISearchYoutubeVideosData): Promise<IListVideosResponse[]> {
         try {
             Joi.assert(data.userId, Joi.string().required())
         } catch (error) {
