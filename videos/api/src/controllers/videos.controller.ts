@@ -6,7 +6,7 @@ interface ISearchYoutubeVideosData {
     videoTitle: string
 }
 
-export class Controller {
+export class VideosController {
     private service: VideosService
 
     constructor() {

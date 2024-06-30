@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
-import { Controller } from "../controllers/controller";
+import { VideosController } from "../controllers/videos.controller";
 import { verify } from "jsonwebtoken";
 import { ITokenData, bearerAuthentication } from "../middleware/middleware";
 
-const videosController = new Controller()
+const videosController = new VideosController()
 
 export const videosRoute = Router()
 
