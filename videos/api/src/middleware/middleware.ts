@@ -14,8 +14,8 @@ export function bearerAuthentication(req: Request, res: Response, next: NextFunc
     try {
         token = token.replace('Bearer ', '')
         const decoded = verify(token, process.env.JWT_SECRET_KEY!.toString())
-        next();
+        next()
     } catch (error) {
-        res.status(401).json({ error: 'Invalid token' });
+        res.status(401).json({ error: 'Invalid token' })
     }
 }
