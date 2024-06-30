@@ -1,5 +1,5 @@
 import Joi from "joi"
-import { VideosService } from "../services/service"
+import { VideosService } from "../services/videos.service"
 
 interface ISearchYoutubeVideosData {
     userId: string
