@@ -1,5 +1,5 @@
-import { Service } from "../services/service"
-import { searchYoutubeVideosDataValidator } from "../validators/validators"
+import Joi from "joi"
+import { VideosService } from "../services/service"
 
 interface ISearchYoutubeVideosData {
     userId: string
@@ -7,17 +7,18 @@ interface ISearchYoutubeVideosData {
 }
 
 export class Controller {
-    private service: Service
+    private service: VideosService
 
     constructor() {
-        this.service = new Service()
+        this.service = new VideosService()
     }
 
     public async searchYoutubeVideos(data: ISearchYoutubeVideosData): Promise<any[]> {
-        const { error } = searchYoutubeVideosDataValidator.validate(data)
-
-        if (error)
-            throw (error.message)
+        try {
+            Joi.assert(data.userId, Joi.string().required())
+        } catch (error) {
+            throw (error)
+        }
 
         const videosList = await this.service.searchYoutubeVideos(data.userId, data.videoTitle)
         return videosList
