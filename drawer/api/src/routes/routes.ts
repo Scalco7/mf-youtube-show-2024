@@ -1,9 +1,12 @@
 import { Request, Response, Router } from "express";
 import { Controller } from "../controllers/controller";
+import { bearerAuthentication } from "../middleware/middleware";
 
 const controller = new Controller()
 
 export const route = Router()
+
+route.use('/', bearerAuthentication)
 
 route.get('/count-favorites/:userId', async (req: Request, res: Response) => {
     try {
