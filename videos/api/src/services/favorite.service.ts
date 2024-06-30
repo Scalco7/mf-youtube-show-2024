@@ -16,7 +16,7 @@ export class FavoriteService {
         }
     }
 
-    public async addFavoriteVideo(userId: string, videoId: string): Promise<string[]> {
+    public async addFavoriteVideo(userId: string, videoId: string): Promise<void> {
         try {
             const apiUrl = `${process.env.API_URL}/favorites/add`
             const request = await axios.post(apiUrl, {
@@ -27,13 +27,14 @@ export class FavoriteService {
                 videoId: videoId,
             })
 
-            return request.data.favorites
+            if (request.data.error)
+                throw (request.data.error)
         } catch (error) {
             throw (error)
         }
     }
 
-    public async removeFavoriteVideo(userId: string, videoId: string): Promise<string[]> {
+    public async removeFavoriteVideo(userId: string, videoId: string): Promise<void> {
         try {
             const apiUrl = `${process.env.API_URL}/favorites/remove`
             const request = await axios.delete(apiUrl, {
@@ -46,7 +47,8 @@ export class FavoriteService {
                 }
             })
 
-            return request.data.favorites
+            if (request.data.error)
+                throw (request.data.error)
         } catch (error) {
             throw (error)
         }
