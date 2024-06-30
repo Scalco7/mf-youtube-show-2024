@@ -23,8 +23,10 @@ export class FavoriteService {
                 headers: {
                     'Authorization': 'Bearer ' + process.env.API_KEY
                 },
-                userId: userId,
-                videoId: videoId,
+                data: {
+                    userId: userId,
+                    videoId: videoId,
+                }
             })
 
             if (request.data.error)

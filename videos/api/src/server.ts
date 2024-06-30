@@ -6,6 +6,7 @@ import { favoriteRoutes } from "./routes/favorite.routes";
 dotenv.config()
 
 const app = express()
+app.use(express.json())
 
 app.use('/videos', videoRoute)
 app.use('/favorites', favoriteRoutes)

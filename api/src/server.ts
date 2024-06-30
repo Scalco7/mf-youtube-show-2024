@@ -12,7 +12,6 @@ const app = express()
 const route = Router()
 
 migrate()
-
 app.use(express.json())
 
 route.get('/', (req: Request, res: Response) => {

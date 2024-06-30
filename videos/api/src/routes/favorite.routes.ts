@@ -3,7 +3,6 @@ import { bearerAuthentication } from "../middleware/middleware";
 import { FavoriteController } from "../controllers/favorite.controller";
 
 const favoriteController = new FavoriteController()
-
 export const favoriteRoutes = Router()
 
 favoriteRoutes.use("/", bearerAuthentication)
