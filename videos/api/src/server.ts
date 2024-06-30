@@ -1,14 +1,12 @@
-import express, { Router, Request, Response } from "express";
+import express from "express";
 import dotenv from 'dotenv'
-import { videosRoute } from "./routes/video.routes";
+import { videoRoute } from "./routes/video.routes";
+import { favoriteRoutes } from "./routes/favorite.routes";
 
 dotenv.config()
 
 const app = express()
-const route = Router()
 
-route.get("/", (req: Request, res: Response) => res.json({ message: "Hello World" }))
-
-app.use(route)
-app.use('/videos', videosRoute)
+app.use('/videos', videoRoute)
+app.use('/favorites', favoriteRoutes)
 app.listen(process.env.PORT, () => console.log("API listen on PORT ", process.env.PORT))
