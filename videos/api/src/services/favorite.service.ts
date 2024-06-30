@@ -19,15 +19,16 @@ export class FavoriteService {
     public async addFavoriteVideo(userId: string, videoId: string): Promise<void> {
         try {
             const apiUrl = `${process.env.API_URL}/favorites/add`
-            const request = await axios.post(apiUrl, {
-                headers: {
-                    'Authorization': 'Bearer ' + process.env.API_KEY
-                },
-                data: {
-                    userId: userId,
-                    videoId: videoId,
-                }
-            })
+            const body = {
+                userId: userId,
+                videoId: videoId,
+            }
+            const request = await axios.post(apiUrl, body,
+                {
+                    headers: {
+                        'Authorization': 'Bearer ' + process.env.API_KEY
+                    }
+                })
 
             if (request.data.error)
                 throw (request.data.error)
