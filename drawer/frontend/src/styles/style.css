@@ -28,12 +28,25 @@ section {
 }
 
 button {
+  position: relative;
   width: 100%;
   padding: 5px 0px;
   background-color: transparent;
   border: 2px solid black;
   font-size: 20px;
   cursor: pointer;
+}
+
+#favorite-number-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  border-left: 2px solid black;
+  padding: 0px 5px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
 }
 
 .current {
