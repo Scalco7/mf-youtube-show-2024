@@ -2,18 +2,35 @@ import { favoriteVideo } from './scripts/api/favoriteVideo/favoriteVideo';
 import { listVideosByTitle } from './scripts/api/listVideosByTitle/listVideosByTitle'
 import { IVideoData } from './scripts/api/listVideosByTitle/listVideosByTitle.interface';
 import { unfavoriteVideo } from './scripts/api/unfavoriteVideo/unfavoriteVideo';
+import { getRoute } from './scripts/utils/navigation';
 import './styles/reset.css'
 import './styles/style.css'
 
 const videoListSection = document.getElementById("video-list")
+const headerSection = document.getElementById("header")
+let searchInput: HTMLInputElement | undefined;
+
+const route = getRoute();
+
+if (route == "/videos") {
+  headerSection!.innerHTML = `
+        <label>
+          <input id="search-input" type="text" />
+        </label>`
+
+  searchInput = document.getElementById("search-input") as HTMLInputElement
+  searchInput?.addEventListener('change', () => searchVideos())
+
+} else if (route == "/favoritos") {
+  headerSection!.innerHTML = `<h3>Favoritos</h3>`
+}
+
 let videosList = (await listVideosByTitle("")).videos
 renderVideosList(videosList)
 
-
-const searchInput = document.getElementById("search-input") as HTMLInputElement
-searchInput?.addEventListener('change', () => searchVideos())
-
 async function searchVideos(): Promise<void> {
+  if (!searchInput) return
+
   const searchValue = searchInput.value
   videosList = (await listVideosByTitle(searchValue)).videos
 
