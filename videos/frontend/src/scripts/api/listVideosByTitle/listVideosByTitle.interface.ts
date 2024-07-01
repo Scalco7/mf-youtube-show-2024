@@ -1,8 +1,8 @@
 export interface IListVideosByTitleResponse {
-    videos: IVideoDataResponse[]
+    videos: IVideoData[]
 }
 
-export interface IVideoDataResponse {
+export interface IVideoData {
     videoId: string;
     title: string;
     description: string;

@@ -42,6 +42,7 @@ section {
   margin: 5px 0px;
 
   svg {
+    cursor: pointer;
     position: absolute;
     z-index: 1;
     width: 24px;
