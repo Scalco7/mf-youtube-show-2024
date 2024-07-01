@@ -11,7 +11,7 @@ drawerIframe.height = "100%";
 
 const videoIframe: HTMLIFrameElement = document.createElement('iframe');
 videoIframe.src = `http://localhost:5174${getRoute()}?token=${token}`;
-// videoIframe.width = "250px";
+videoIframe.width = "100%";
 videoIframe.height = "100%";
 
 const containerElement: HTMLElement | null = document.getElementById('app');
