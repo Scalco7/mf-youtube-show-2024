@@ -22,7 +22,7 @@ export class AuthService {
     const token = sign(
       { id: dbUserData.id, name: dbUserData.name },
       process.env.JWT_SECRET_KEY!.toString(),
-      { expiresIn: "2h" },
+      { expiresIn: "6h" },
     );
     return token;
   }

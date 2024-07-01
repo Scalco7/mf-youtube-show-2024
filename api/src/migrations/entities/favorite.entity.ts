@@ -5,6 +5,7 @@ import {
   Model,
 } from "sequelize";
 import { sequelize } from "../../database/database";
+import { alertNewFavoriteLength } from "../../hooks/favorite.hooks";
 
 export class Favorite extends Model<
   InferAttributes<Favorite>,
@@ -33,3 +34,6 @@ Favorite.init(
   },
   { sequelize, modelName: "favorite" },
 );
+
+Favorite.afterCreate(async (user, options) => alertNewFavoriteLength(user.dataValues.user_id))
+Favorite.afterDestroy(async (user, options) => alertNewFavoriteLength(user.dataValues.user_id))
