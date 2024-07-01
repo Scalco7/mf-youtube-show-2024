@@ -1,5 +1,7 @@
 import WebSocket from "ws";
 import { getUserIdByToken } from "../utils/getUserIdByToken";
+import { webSocketAuthentication } from "../middleware/middleware";
+import { parse } from 'url'
 
 export class FavoriteWebSocket {
     private websockets: { [key: string]: WebSocket } = {};
@@ -10,6 +12,14 @@ export class FavoriteWebSocket {
         });
 
         expressServer.on("upgrade", (request: any, socket: any, head: any) => {
+            const autenticated = webSocketAuthentication(request)
+
+            if (!autenticated) {
+                socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n')
+                socket.destroy()
+                return
+            }
+
             websocketServer.handleUpgrade(request, socket, head, (websocket) => {
                 websocketServer.emit("connection", websocket, request);
             });
@@ -21,11 +31,13 @@ export class FavoriteWebSocket {
         return websocketServer;
     }
 
-    public onConnection(ws: WebSocket, req: any) {
-        const token = req.headers.authorization
-        const userId = getUserIdByToken(token)
+    private onConnection(ws: WebSocket, req: any) {
+        let { token } = parse(req.url, true).query
+        const userId = getUserIdByToken(token!.toString())
 
         const newWebsockets = { ...this.websockets, [userId]: ws }
         this.websockets = newWebsockets
+
+        ws.on('message', message => console.log(message));
     }
 }
