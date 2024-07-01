@@ -16,3 +16,12 @@ authRoute.post("/login", async (req: Request, res: Response) => {
     res.status(400).json({ error: error });
   }
 });
+
+authRoute.post("/register", async (req: Request, res: Response) => {
+  try {
+    const token = await authController.registerUser(req.body);
+    res.status(200).json({ token: token });
+  } catch (error) {
+    res.status(400).json({ error: error });
+  }
+});
