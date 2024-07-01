@@ -7,24 +7,20 @@ const videoListSection = document.getElementById("video-list")
 const videosList = (await listVideosByTitle("")).videos
 renderVideosList(videosList)
 
-function toogleFavoriteVideo(videoId: string): void {
+async function toogleFavoriteVideo(videoId: string): Promise<void> {
     const video: IVideoData | undefined = videosList.find((video) => video.videoId == videoId)
 
     if (!video)
         return
 
-    try {
-        if (video.favorite) {
-            console.log("desfavoritando")
-        } else {
-            console.log("favoritando")
-        }
-
-        video.favorite = !video.favorite
-        renderVideosList(videosList)
-    }
-    catch (error) {
-        alert(error)
+    if (video.favorite) {
+        console.log("desfavoritando")
+        document.getElementById(videoId)!.classList.remove("favorite-video")
+        video.favorite = false
+    } else {
+        console.log("favoritando")
+        document.getElementById(videoId)!.classList.add("favorite-video")
+        video.favorite = true
     }
 }
 
