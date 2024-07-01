@@ -10,12 +10,18 @@ export class Favorite extends Model<
   InferAttributes<Favorite>,
   InferCreationAttributes<Favorite>
 > {
+  declare id: string;
   declare user_id: string;
   declare video_id: string;
 }
 
 Favorite.init(
   {
+    id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,
+    },
     user_id: {
       type: DataTypes.STRING,
       allowNull: false,
