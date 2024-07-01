@@ -15,9 +15,9 @@ videoRoute.get('/list/', async (req: Request, res: Response) => {
         const decoded = verify(token, process.env.JWT_SECRET_KEY!.toString()) as any as ITokenData
         const videoTitle = req.query.title as string
         const videos = await videoController.searchYoutubeVideos({ userId: decoded.id, videoTitle })
-        res.json({ status: 200, videos: videos })
+        res.status(200).json({ videos: videos })
     }
     catch (error) {
-        res.json({ status: 400, error: error })
+        res.status(400).json({ error: error })
     }
 })
