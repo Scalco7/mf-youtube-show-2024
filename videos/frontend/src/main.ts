@@ -1,4 +1,4 @@
-import { listVideosByTitle } from './api/listVideosByTitle/listVideosByTitle'
+import { listVideosByTitle } from './scripts/api/listVideosByTitle/listVideosByTitle'
 import './styles/reset.css'
 import './styles/style.css'
 
