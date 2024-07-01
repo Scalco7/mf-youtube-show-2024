@@ -1,10 +1,10 @@
 import axios from "axios";
-import { IListVideosByTitleResponse } from "./listVideosByTitle.interface";
+import { IListVideosResponse } from "./interfaces";
 
 const apiUrl = import.meta.env.VITE_API_URL
 
-export async function listVideosByTitle(title: string): Promise<IListVideosByTitleResponse> {
-    const url = `${apiUrl}/videos/list/?title=${title}`
+export async function listFavoriteVideos(): Promise<IListVideosResponse> {
+    const url = `${apiUrl}/videos/favorites`
     const token = localStorage.getItem('token')
 
     const response = await axios.get(url, {

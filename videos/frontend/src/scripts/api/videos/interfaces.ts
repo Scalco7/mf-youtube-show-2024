@@ -1,4 +1,4 @@
-export interface IListVideosByTitleResponse {
+export interface IListVideosResponse {
     videos: IVideoData[]
 }
 

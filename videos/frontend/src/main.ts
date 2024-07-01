@@ -1,16 +1,19 @@
 import { favoriteVideo } from './scripts/api/favoriteVideo/favoriteVideo';
-import { listVideosByTitle } from './scripts/api/listVideosByTitle/listVideosByTitle'
-import { IVideoData } from './scripts/api/listVideosByTitle/listVideosByTitle.interface';
+import { listVideosByTitle } from './scripts/api/videos/listVideosByTitle'
+import { IVideoData } from './scripts/api/videos/interfaces';
 import { unfavoriteVideo } from './scripts/api/unfavoriteVideo/unfavoriteVideo';
 import { getRoute } from './scripts/utils/navigation';
 import './styles/reset.css'
 import './styles/style.css'
+import { listFavoriteVideos } from './scripts/api/videos/listFavoriteVideos';
 
 const videoListSection = document.getElementById("video-list")
 const headerSection = document.getElementById("header")
 let searchInput: HTMLInputElement | undefined;
 
 const route = getRoute();
+
+let videosList: IVideoData[] = [];
 
 if (route == "/videos") {
   headerSection!.innerHTML = `
@@ -21,11 +24,14 @@ if (route == "/videos") {
   searchInput = document.getElementById("search-input") as HTMLInputElement
   searchInput?.addEventListener('change', () => searchVideos())
 
-} else if (route == "/favoritos") {
+  videosList = (await listVideosByTitle("")).videos
+}
+else if (route == "/favoritos") {
   headerSection!.innerHTML = `<h3>Favoritos</h3>`
+  videosList = (await listFavoriteVideos()).videos
 }
 
-let videosList = (await listVideosByTitle("")).videos
+
 renderVideosList(videosList)
 
 async function searchVideos(): Promise<void> {
