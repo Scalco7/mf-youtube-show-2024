@@ -1,4 +1,4 @@
-import { getRoute } from './scripts/navigation';
+import { getRoute, navigateTo } from './scripts/navigation';
 import './styles/reset.css'
 import './styles/style.css'
 
@@ -17,3 +17,10 @@ videoIframe.height = "100%";
 const containerElement: HTMLElement | null = document.getElementById('app');
 containerElement!.appendChild(drawerIframe);
 containerElement!.appendChild(videoIframe);
+
+window.addEventListener('message', (event) => {
+    const messageData = event.data;
+    if (messageData.action === 'changeRoute') {
+        navigateTo(messageData.route);
+    }
+});
