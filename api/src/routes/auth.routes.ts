@@ -8,9 +8,9 @@ export const authRoute = Router()
 authRoute.post('/login', async (req: Request, res: Response) => {
     try {
         const token = await authController.login(req.body)
-        res.json({ status: 200, token: token });
+        res.status(200).json({ token: token });
     }
     catch (error) {
-        res.json({ status: 400, error: error })
+        res.status(400).json({ error: error })
     }
 })

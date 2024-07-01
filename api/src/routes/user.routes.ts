@@ -14,9 +14,9 @@ userRoute.get('/', async (req: Request, res: Response) => {
 userRoute.post('/', async (req: Request, res: Response) => {
     try {
         const user = await userController.createUser(req.body)
-        res.json({ status: 200, data: user });
+        res.status(200).json({ data: user });
     }
     catch (error) {
-        res.json({ status: 400, error: error })
+        res.status(400).json({ error: error })
     }
 })

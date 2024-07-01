@@ -11,26 +11,26 @@ favoriteRoute.get('/:userId', async (req: Request, res: Response) => {
     try {
         const userId = req.params.userId
         const favoriteList = await favoriteController.listFavoriteByUserId({ userId })
-        res.json({ status: 200, favorites: favoriteList })
+        res.status(200).json({ favorites: favoriteList })
     } catch (error) {
-        res.json({ status: 400, error: error })
+        res.status(400).json({ error: error })
     }
 })
 
 favoriteRoute.post('/add', async (req: Request, res: Response) => {
     try {
         await favoriteController.addFavoriteVideo(req.body)
-        res.json({ status: 200 })
+        res.status(200)
     } catch (error) {
-        res.json({ status: 400, error: error })
+        res.status(400).json({ error: error })
     }
 })
 
 favoriteRoute.delete('/remove', async (req: Request, res: Response) => {
     try {
         await favoriteController.removeFavoriteVideo(req.body)
-        res.json({ status: 200 })
+        res.status(200)
     } catch (error) {
-        res.json({ status: 400, error: error })
+        res.status(400).json({ error: error })
     }
 })

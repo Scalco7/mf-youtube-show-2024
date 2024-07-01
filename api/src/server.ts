@@ -14,10 +14,6 @@ const route = Router()
 migrate()
 app.use(express.json())
 
-route.get('/', (req: Request, res: Response) => {
-    res.json({ message: 'Hello World' })
-})
-
 app.use('/auth', authRoute)
 app.use('/users', userRoute)
 app.use('/favorites', favoriteRoute)
