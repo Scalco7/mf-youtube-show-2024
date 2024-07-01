@@ -12,8 +12,8 @@ route.get('/count-favorites/:userId', async (req: Request, res: Response) => {
     try {
         const userId = req.params.userId
         const count = await controller.countFavoritesByUserId({ userId })
-        res.json({ status: 200, favoritesCount: count })
+        res.status(200).json({ favoritesCount: count })
     } catch (error) {
-        res.json({ status: 400, error: error })
+        res.status(400).json({ error: error })
     }
 })
