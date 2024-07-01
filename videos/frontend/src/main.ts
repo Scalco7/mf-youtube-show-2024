@@ -6,15 +6,25 @@ import './styles/reset.css'
 import './styles/style.css'
 
 const videoListSection = document.getElementById("video-list")
-const videosList = (await listVideosByTitle("")).videos
+let videosList = (await listVideosByTitle("")).videos
 renderVideosList(videosList)
+
+
+const searchInput = document.getElementById("search-input") as HTMLInputElement
+searchInput?.addEventListener('change', () => searchVideos())
+
+async function searchVideos(): Promise<void> {
+  const searchValue = searchInput.value
+  videosList = (await listVideosByTitle(searchValue)).videos
+
+  renderVideosList(videosList)
+}
 
 async function toogleFavoriteVideo(videoId: string): Promise<void> {
   const video: IVideoData | undefined = videosList.find((video) => video.videoId == videoId)
 
   if (!video)
     return
-
 
   if (video.favorite) {
     try {
@@ -36,7 +46,7 @@ async function toogleFavoriteVideo(videoId: string): Promise<void> {
   }
 }
 
-function renderVideosList(videos: IVideoData[]) {
+function renderVideosList(videos: IVideoData[]): void {
   let videoListHtml: string[] = []
   videos.forEach((video: IVideoData) => {
     const videoHtml = `
