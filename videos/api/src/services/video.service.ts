@@ -37,7 +37,7 @@ export class VideoService {
       videoId: video.id.videoId,
       title: video.snippet.title,
       description: video.snippet.description,
-      thumbnail: video.snippet.thumbnails.default,
+      thumbnail: video.snippet.thumbnails.high,
       favorite: favoritesList.includes(video.id.videoId),
     }));
 
