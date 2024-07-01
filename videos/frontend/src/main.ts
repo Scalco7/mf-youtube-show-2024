@@ -1,3 +1,4 @@
+import { favoriteVideo } from './scripts/api/favoriteVideo/favoriteVideo';
 import { listVideosByTitle } from './scripts/api/listVideosByTitle/listVideosByTitle'
 import { IVideoData } from './scripts/api/listVideosByTitle/listVideosByTitle.interface';
 import './styles/reset.css'
@@ -8,26 +9,32 @@ const videosList = (await listVideosByTitle("")).videos
 renderVideosList(videosList)
 
 async function toogleFavoriteVideo(videoId: string): Promise<void> {
-    const video: IVideoData | undefined = videosList.find((video) => video.videoId == videoId)
+  const video: IVideoData | undefined = videosList.find((video) => video.videoId == videoId)
 
-    if (!video)
-        return
+  if (!video)
+    return
 
-    if (video.favorite) {
-        console.log("desfavoritando")
-        document.getElementById(videoId)!.classList.remove("favorite-video")
-        video.favorite = false
-    } else {
-        console.log("favoritando")
-        document.getElementById(videoId)!.classList.add("favorite-video")
-        video.favorite = true
+
+  if (video.favorite) {
+    console.log("desfavoritando")
+    document.getElementById(videoId)!.classList.remove("favorite-video")
+    video.favorite = false
+  } else {
+    try {
+      await favoriteVideo(videoId)
+    } catch (error) {
+      alert("Erro ao favoritar vídeo")
     }
+
+    document.getElementById(videoId)!.classList.add("favorite-video")
+    video.favorite = true
+  }
 }
 
 function renderVideosList(videos: IVideoData[]) {
-    let videoListHtml: string[] = []
-    videos.forEach((video: IVideoData) => {
-        const videoHtml = `
+  let videoListHtml: string[] = []
+  videos.forEach((video: IVideoData) => {
+    const videoHtml = `
             <post class="video-box${video.favorite ? ' favorite-video' : ''}" id="${video.videoId}">
               <svg class="favorite-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -49,13 +56,13 @@ function renderVideosList(videos: IVideoData[]) {
               <img src="${video.thumbnail.url}" />
             </post>`
 
-        videoListHtml.push(videoHtml)
-    });
+    videoListHtml.push(videoHtml)
+  });
 
-    videoListSection!.innerHTML = videoListHtml.join('')
-    const videosHtml = document.getElementsByClassName('video-box')
+  videoListSection!.innerHTML = videoListHtml.join('')
+  const videosHtml = document.getElementsByClassName('video-box')
 
-    Object.keys(videosHtml).forEach((key: any) => {
-        videosHtml[key].children[0].addEventListener('click', () => toogleFavoriteVideo(videosHtml[key].id))
-    });
+  Object.keys(videosHtml).forEach((key: any) => {
+    videosHtml[key].children[0].addEventListener('click', () => toogleFavoriteVideo(videosHtml[key].id))
+  });
 }
