@@ -35,13 +35,17 @@ export class VideoService {
       throw error;
     }
 
-    const formattedResponse: IListVideosResponse[] = videosResponse.items.map((video) => ({
-      videoId: video.id.videoId,
-      title: video.snippet.title,
-      description: video.snippet.description,
-      thumbnail: video.snippet.thumbnails.high,
-      favorite: favoritesList.includes(video.id.videoId),
-    }));
+    const formattedResponse: IListVideosResponse[] = videosResponse.items.map((video) => {
+      const videoId: string = typeof video.id == "string" ? video.id : video.id.videoId
+
+      return {
+        videoId: videoId,
+        title: video.snippet.title,
+        description: video.snippet.description,
+        thumbnail: video.snippet.thumbnails.high,
+        favorite: favoritesList.includes(videoId),
+      }
+    });
 
     return formattedResponse;
   }
@@ -61,20 +65,24 @@ export class VideoService {
 
     try {
       const apiYtKey = process.env.YOUTUBE_API_KEY ?? '';
-      const params = `videos?id=${favoritesList.join(',')}`
+      const params = `videos?part=snippet&id=${favoritesList.join(',')}`
 
       videosResponse = (await axios.get(this.urlBaseApiYt(params, apiYtKey))).data;
     } catch (error) {
       throw error;
     }
 
-    const formattedResponse: IListVideosResponse[] = videosResponse.items.map((video) => ({
-      videoId: video.id.videoId,
-      title: video.snippet.title,
-      description: video.snippet.description,
-      thumbnail: video.snippet.thumbnails.high,
-      favorite: favoritesList.includes(video.id.videoId),
-    }));
+    const formattedResponse: IListVideosResponse[] = videosResponse.items.map((video) => {
+      const videoId: string = typeof video.id == "string" ? video.id : video.id.videoId
+
+      return {
+        videoId: videoId,
+        title: video.snippet.title,
+        description: video.snippet.description,
+        thumbnail: video.snippet.thumbnails.high,
+        favorite: favoritesList.includes(videoId),
+      }
+    });
 
     return formattedResponse;
   }

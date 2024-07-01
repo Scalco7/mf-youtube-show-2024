@@ -10,7 +10,7 @@ export interface IYoutubeVideoData {
   id: {
     kind: string;
     videoId: string;
-  };
+  } | string;
   snippet: {
     publishedAt: Date;
     channelId: string;
