@@ -1,24 +1,31 @@
 import WebSocket from "ws";
+import { getUserIdByToken } from "../utils/getUserIdByToken";
 
-function onError(ws: any, err: any) {
-    console.error(`onError: ${err.message}`);
-}
+export class FavoriteWebSocket {
+    private websockets: { [key: string]: WebSocket } = {};
 
-function onMessage(ws: any, data: any) {
-    console.log(`onMessage: ${data}`);
-    ws.send(`recebido!`);
-}
+    public createWebsocketServer(expressServer: any): WebSocket.Server {
+        const websocketServer = new WebSocket.Server({
+            noServer: true,
+        });
 
-function onConnection(ws: any, req: any) {
-    ws.on('message', (data: any) => onMessage(ws, data));
-    ws.on('error', (error: any) => onError(ws, error));
-    console.log(`onConnection`);
-}
+        expressServer.on("upgrade", (request: any, socket: any, head: any) => {
+            websocketServer.handleUpgrade(request, socket, head, (websocket) => {
+                websocketServer.emit("connection", websocket, request);
+            });
+        });
 
-export function createWebsocketServer(server: any) {
-    const websocketServer = new WebSocket.Server({ server });
-    websocketServer.on('connection', onConnection);
+        websocketServer.on('connection', this.onConnection);
 
-    console.log(`App Web Socket Server is running!`);
-    return websocketServer;
+        console.log(`App Web Socket Server is running!`);
+        return websocketServer;
+    }
+
+    public onConnection(ws: WebSocket, req: any) {
+        const token = req.headers.authorization
+        const userId = getUserIdByToken(token)
+
+        const newWebsockets = { ...this.websockets, [userId]: ws }
+        this.websockets = newWebsockets
+    }
 }
