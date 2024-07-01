@@ -4,18 +4,17 @@ export class AuthService {
     public async registerUser(name: string, email: string, password: string): Promise<string> {
         try {
             const apiUrl = `${process.env.API_URL}/auth/register`;
-            const request = await axios.post(apiUrl, {
-                headers: {
-                    Authorization: "Bearer " + process.env.API_KEY,
-                },
-                data: {
-                    name,
-                    email,
-                    password
-                },
-            });
-
-            console.log(request)
+            const body = {
+                name: name,
+                email: email,
+                password: password
+            }
+            const request = await axios.post(apiUrl, body,
+                {
+                    headers: {
+                        Authorization: "Bearer " + process.env.API_KEY,
+                    },
+                });
 
             if (request.data.error) throw request.data.error;
 
@@ -25,20 +24,20 @@ export class AuthService {
         }
     }
 
-    public async login(name: string, email: string): Promise<string> {
+    public async login(email: string, password: string): Promise<string> {
         try {
             const apiUrl = `${process.env.API_URL}/auth/login`;
-            const request = await axios.post(apiUrl, {
-                headers: {
-                    Authorization: "Bearer " + process.env.API_KEY,
-                },
-                data: {
-                    name,
-                    email,
-                },
-            });
+            const body = {
+                email: email,
+                password: password
+            }
+            const request = await axios.post(apiUrl, body,
+                {
+                    headers: {
+                        Authorization: "Bearer " + process.env.API_KEY,
+                    },
+                });
 
-            console.log(request)
 
             if (request.data.error) throw request.data.error;
 
