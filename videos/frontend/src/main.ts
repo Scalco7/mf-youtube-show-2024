@@ -1,6 +1,7 @@
 import { favoriteVideo } from './scripts/api/favoriteVideo/favoriteVideo';
 import { listVideosByTitle } from './scripts/api/listVideosByTitle/listVideosByTitle'
 import { IVideoData } from './scripts/api/listVideosByTitle/listVideosByTitle.interface';
+import { unfavoriteVideo } from './scripts/api/unfavoriteVideo/unfavoriteVideo';
 import './styles/reset.css'
 import './styles/style.css'
 
@@ -16,7 +17,11 @@ async function toogleFavoriteVideo(videoId: string): Promise<void> {
 
 
   if (video.favorite) {
-    console.log("desfavoritando")
+    try {
+      await unfavoriteVideo(videoId)
+    } catch (error) {
+      alert("Erro ao favoritar vídeo")
+    }
     document.getElementById(videoId)!.classList.remove("favorite-video")
     video.favorite = false
   } else {
