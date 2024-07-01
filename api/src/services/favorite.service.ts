@@ -1,45 +1,55 @@
 import { Favorite } from "../migrations/entities/favorite.entity";
 
 export class FavoriteService {
-    public async addFavoriteVideo(userId: string, videoId: string): Promise<Favorite> {
-        let favorite
-        try {
-            favorite = await Favorite.findOne({ where: { user_id: userId, video_id: videoId } })
-        } catch (error) {
-            throw 'Erro buscando video favorito'
-        }
-
-        if (favorite)
-            throw 'Video favorito já existe'
-
-
-        return Favorite.create({ user_id: userId, video_id: videoId })
+  public async addFavoriteVideo(
+    userId: string,
+    videoId: string,
+  ): Promise<Favorite> {
+    let favorite;
+    try {
+      favorite = await Favorite.findOne({
+        where: { user_id: userId, video_id: videoId },
+      });
+    } catch (error) {
+      throw "Erro buscando video favorito";
     }
 
-    public async removeFavoriteVideo(userId: string, videoId: string): Promise<void> {
-        let favorite
-        try {
-            favorite = await Favorite.findOne({ where: { user_id: userId, video_id: videoId } })
-        } catch (error) {
-            throw 'Erro buscando video favorito'
-        }
+    if (favorite) throw "Video favorito já existe";
 
-        if (!favorite)
-            throw 'Video favorito não existe'
+    return Favorite.create({ user_id: userId, video_id: videoId });
+  }
 
-        return favorite.destroy()
+  public async removeFavoriteVideo(
+    userId: string,
+    videoId: string,
+  ): Promise<void> {
+    let favorite;
+    try {
+      favorite = await Favorite.findOne({
+        where: { user_id: userId, video_id: videoId },
+      });
+    } catch (error) {
+      throw "Erro buscando video favorito";
     }
 
-    public async listFavoriteByUserId(userId: string): Promise<string[]> {
-        let favoriteList: string[] = [];
+    if (!favorite) throw "Video favorito não existe";
 
-        try {
-            const favoriteQuery = await Favorite.findAll({ where: { user_id: userId }, attributes: ['video_id'] })
-            favoriteList = favoriteQuery.map((fav) => fav.dataValues.video_id)
-        } catch (err) {
-            throw 'erro ao buscar no banco de dados'
-        }
+    return favorite.destroy();
+  }
 
-        return favoriteList
+  public async listFavoriteByUserId(userId: string): Promise<string[]> {
+    let favoriteList: string[] = [];
+
+    try {
+      const favoriteQuery = await Favorite.findAll({
+        where: { user_id: userId },
+        attributes: ["video_id"],
+      });
+      favoriteList = favoriteQuery.map((fav) => fav.dataValues.video_id);
+    } catch (err) {
+      throw "erro ao buscar no banco de dados";
     }
-} 
+
+    return favoriteList;
+  }
+}

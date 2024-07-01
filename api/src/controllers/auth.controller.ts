@@ -2,24 +2,23 @@ import { AuthService } from "../services/auth.service";
 import { ILogiDataValidator } from "../validators/auth.validators";
 
 interface ILoginData {
-    email: string
-    password: string
+  email: string;
+  password: string;
 }
 
 export class AuthController {
-    private authService: AuthService
+  private authService: AuthService;
 
-    constructor() {
-        this.authService = new AuthService()
-    }
+  constructor() {
+    this.authService = new AuthService();
+  }
 
-    public async login(data: ILoginData): Promise<string> {
-        const { error } = ILogiDataValidator.validate(data)
+  public async login(data: ILoginData): Promise<string> {
+    const { error } = ILogiDataValidator.validate(data);
 
-        if (error)
-            throw (error.message)
+    if (error) throw error.message;
 
-        const token = await this.authService.login(data.email, data.password)
-        return token
-    }
+    const token = await this.authService.login(data.email, data.password);
+    return token;
+  }
 }

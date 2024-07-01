@@ -1,18 +1,29 @@
-import { DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
+import {
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+} from "sequelize";
 import { sequelize } from "../../database/database";
 
-export class Favorite extends Model<InferAttributes<Favorite>, InferCreationAttributes<Favorite>> {
-    declare user_id: string;
-    declare video_id: string;
+export class Favorite extends Model<
+  InferAttributes<Favorite>,
+  InferCreationAttributes<Favorite>
+> {
+  declare user_id: string;
+  declare video_id: string;
 }
 
-Favorite.init({
+Favorite.init(
+  {
     user_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     video_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-}, { sequelize, modelName: 'favorite' })
+  },
+  { sequelize, modelName: "favorite" },
+);
