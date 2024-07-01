@@ -34,7 +34,7 @@ export class FavoriteService {
 
       if (request.data.error) throw request.data.error;
     } catch (error) {
-      throw error;
+      throw (error as any).response.data.error;
     }
   }
 
@@ -56,7 +56,7 @@ export class FavoriteService {
 
       if (request.data.error) throw request.data.error;
     } catch (error) {
-      throw error;
+      throw (error as any).response.data.error;
     }
   }
 }

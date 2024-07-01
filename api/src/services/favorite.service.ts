@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { Favorite } from "../migrations/entities/favorite.entity";
 
 export class FavoriteService {
@@ -16,7 +17,13 @@ export class FavoriteService {
 
     if (favorite) throw "Video favorito já existe";
 
-    return Favorite.create({ user_id: userId, video_id: videoId });
+    try {
+      const id = randomUUID();
+      const newFavorite = await Favorite.create({ id, user_id: userId, video_id: videoId });
+      return newFavorite
+    } catch (error) {
+      throw ("erro ao adicionar favorito - " + error)
+    }
   }
 
   public async removeFavoriteVideo(
@@ -34,7 +41,7 @@ export class FavoriteService {
 
     if (!favorite) throw "Video favorito não existe";
 
-    return favorite.destroy();
+    return await favorite.destroy();
   }
 
   public async listFavoriteByUserId(userId: string): Promise<string[]> {

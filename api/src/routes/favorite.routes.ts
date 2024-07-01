@@ -22,7 +22,7 @@ favoriteRoute.get("/:userId", async (req: Request, res: Response) => {
 favoriteRoute.post("/add", async (req: Request, res: Response) => {
   try {
     await favoriteController.addFavoriteVideo(req.body);
-    res.status(200);
+    res.status(200).json();
   } catch (error) {
     res.status(400).json({ error: error });
   }
@@ -31,7 +31,7 @@ favoriteRoute.post("/add", async (req: Request, res: Response) => {
 favoriteRoute.delete("/remove", async (req: Request, res: Response) => {
   try {
     await favoriteController.removeFavoriteVideo(req.body);
-    res.status(200);
+    res.status(200).json();
   } catch (error) {
     res.status(400).json({ error: error });
   }
