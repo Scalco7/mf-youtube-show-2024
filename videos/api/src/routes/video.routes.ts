@@ -19,3 +19,13 @@ videoRoute.get("/list/", async (req: Request, res: Response) => {
     res.status(400).json({ error: error });
   }
 });
+
+videoRoute.get("/favorites", async (req: Request, res: Response) => {
+  try {
+    const userId = getUserIdByToken(req.header("Authorization") ?? '')
+    const videos = await videoController.listFavoriteVideos(userId);
+    res.status(200).json({ videos: videos });
+  } catch (error) {
+    res.status(400).json({ error: error });
+  }
+});

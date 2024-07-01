@@ -29,4 +29,15 @@ export class VideosController {
     );
     return videosList;
   }
+
+  public async listFavoriteVideos(userId: string): Promise<IListVideosResponse[]> {
+    try {
+      Joi.assert(userId, Joi.string().required());
+    } catch (error) {
+      throw error;
+    }
+
+    const videosList = await this.VideoService.listFavoriteVideos(userId);
+    return videosList;
+  }
 }
