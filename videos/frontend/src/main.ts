@@ -2,7 +2,7 @@ import { favoriteVideo } from './scripts/api/favoriteVideo/favoriteVideo';
 import { listVideosByTitle } from './scripts/api/videos/listVideosByTitle'
 import { IVideoData } from './scripts/api/videos/interfaces';
 import { unfavoriteVideo } from './scripts/api/unfavoriteVideo/unfavoriteVideo';
-import { getRoute } from './scripts/utils/navigation';
+import { getParams, getRoute } from './scripts/utils/navigation';
 import './styles/reset.css'
 import './styles/style.css'
 import { listFavoriteVideos } from './scripts/api/videos/listFavoriteVideos';
@@ -12,6 +12,11 @@ const headerSection = document.getElementById("header")
 let searchInput: HTMLInputElement | undefined;
 
 const route = getRoute();
+const params = getParams();
+const token = params.get('token')
+
+if (token)
+  localStorage.setItem('token', token)
 
 let videosList: IVideoData[] = [];
 

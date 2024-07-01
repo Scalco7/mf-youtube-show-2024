@@ -1,9 +1,5 @@
 export function navigateTo(route: string): void {
-  const messageData = {
-    action: 'changeRoute',
-    route: route,
-  };
-  window.parent.postMessage(messageData, '*');
+  window.location.href = route;
 }
 
 export function getRoute(): string {
