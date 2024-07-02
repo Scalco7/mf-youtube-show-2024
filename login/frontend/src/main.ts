@@ -2,7 +2,11 @@ import './styles/reset.css'
 import './styles/toast.style.css'
 import './styles/style.css'
 import { showToast } from './scripts/toast/toast'
-import { validateLoginData, validateRegisterData } from './scripts/validators/auth.validators'
+import { validateLoginData } from './scripts/validators/auth.validators'
+import loginRequest from './scripts/api/auth/login'
+import { AuthController } from './scripts/auth.controller'
+
+const authController = new AuthController()
 
 let isRegister = false
 
@@ -21,41 +25,21 @@ function handleOnNavigationButtonClicked(): void {
     renderElements()
 }
 
-function handleOnButtonClicked(): void {
+async function handleOnButtonClicked(): Promise<void> {
     if (isRegister) {
         const name = (document.getElementById('name-input') as HTMLInputElement).value
         const email = (document.getElementById('email-input') as HTMLInputElement).value
         const password = (document.getElementById('password-input') as HTMLInputElement).value
 
-        try {
-            validateRegisterData(name, email, password)
-        } catch (error) {
-            showToast({
-                message: String(error) ?? '',
-                variant: 'error',
-                duration: 2000
-            })
-            return
-        }
-
-        console.log("Resgistrando - ", name, ' / ', email, ' / ', password)
+        await authController.registerUser(name, email, password)
     }
     else {
+        //add loading
+
         const email = (document.getElementById('email-input') as HTMLInputElement).value
         const password = (document.getElementById('password-input') as HTMLInputElement).value
 
-        try {
-            validateLoginData(email, password)
-        } catch (error) {
-            showToast({
-                message: String(error) ?? '',
-                variant: 'error',
-                duration: 2000
-            })
-            return
-        }
-
-        console.log("Entrando - ", email, ' / ', password)
+        await authController.loginUser(email, password)
     }
 }
 
