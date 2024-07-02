@@ -1,5 +1,6 @@
 import loginRequest from "./api/auth/login"
 import registerRequest from "./api/auth/register"
+import { onLogin } from "./utils"
 import { showToast } from "./toast/toast"
 import { validateLoginData, validateRegisterData } from "./validators/auth.validators"
 
@@ -18,7 +19,7 @@ export class AuthController {
 
         try {
             const token = await registerRequest({ name, email, password })
-            console.log("Token - ", token)
+            onLogin(token.token)
         }
         catch (error) {
             showToast({
@@ -46,10 +47,9 @@ export class AuthController {
 
         try {
             const token = await loginRequest({ email, password })
-            console.log("Token - ", token)
+            onLogin(token.token)
         }
         catch (error) {
-            console.log(error)
             showToast({
                 message: String(error) ?? '',
                 variant: 'error',

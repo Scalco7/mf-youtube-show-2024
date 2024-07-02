@@ -1,9 +1,6 @@
 import './styles/reset.css'
 import './styles/toast.style.css'
 import './styles/style.css'
-import { showToast } from './scripts/toast/toast'
-import { validateLoginData } from './scripts/validators/auth.validators'
-import loginRequest from './scripts/api/auth/login'
 import { AuthController } from './scripts/auth.controller'
 
 const authController = new AuthController()
