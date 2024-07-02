@@ -1,0 +1,8 @@
+FROM node:16-alpine
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm i -g serve
+RUN npm run build
+EXPOSE 4050
+CMD ["npm", "run", "start"]
