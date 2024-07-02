@@ -4,9 +4,7 @@ export default function validateToken(token: string | null): boolean {
     if (!token) return false
 
     try {
-        console.log("aqui")
-        const decoded = jwtDecode(token);
-        console.log(decoded)
+        jwtDecode(token);
         return true
     } catch (error) {
         return false
