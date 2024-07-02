@@ -5,6 +5,8 @@ import { navigateTo, getRoute, getParams } from "./scripts/navigation";
 import { io } from "socket.io-client";
 import { jwtDecode } from "jwt-decode";
 
+const favoriteNumberBox = document.getElementById('favorite-number-box')
+
 const params = getParams();
 const token = params.get('token')
 let userId = ''
@@ -36,4 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const socket = io('http://localhost:3040')
-socket.on(userId, (newLength) => { console.log('nova quantia - ', newLength) })
+socket.on(userId, handleNewFavoriteQuantity)
+
+function handleNewFavoriteQuantity(newQuantity: number) {
+  favoriteNumberBox!.innerText = newQuantity.toString()
+}

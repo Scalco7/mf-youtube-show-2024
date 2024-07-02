@@ -39,11 +39,11 @@ button {
 
 #favorite-number-box {
   display: flex;
+  width: 40px;
   align-items: center;
   justify-content: center;
   position: absolute;
   border-left: 2px solid black;
-  padding: 0px 5px;
   top: 0px;
   bottom: 0px;
   right: 0px;
