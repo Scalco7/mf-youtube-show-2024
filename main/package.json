@@ -9,11 +9,11 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^9.0.6",
+    "@types/jwt-decode": "^3.1.0",
     "typescript": "^5.2.2",
     "vite": "^5.3.1"
   },
   "dependencies": {
-    "jsonwebtoken": "^9.0.2"
+    "jwt-decode": "^4.0.0"
   }
 }
