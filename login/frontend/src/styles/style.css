@@ -90,3 +90,26 @@ button:active {
 #logo-svg {
   width: 270px;
 }
+
+#ellipsis-svg {
+  position: absolute;
+  z-index: -1;
+  height: 80vh;
+  left: 0px;
+}
+
+#polygons-svg {
+  position: absolute;
+  z-index: -1;
+  width: 25vw;
+  bottom: 0px;
+  right: 0px;
+}
+
+#substract-svg {
+  position: absolute;
+  z-index: -1;
+  width: 20vw;
+  top: 0px;
+  right: 0px;
+}
