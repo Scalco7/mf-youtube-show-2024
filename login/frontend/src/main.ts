@@ -19,10 +19,49 @@ function handleOnNavigationButtonClicked(): void {
 }
 
 function handleOnButtonClicked(): void {
-    if (!isRegister)
-        console.log('entrou')
-    else
-        console.log('registrou')
+    if (isRegister) {
+        const name = (document.getElementById('name-input') as HTMLInputElement).value
+        const email = (document.getElementById('email-input') as HTMLInputElement).value
+        const password = (document.getElementById('password-input') as HTMLInputElement).value
+
+        if (!name) {
+            alert('Digite um nome')
+            return
+        }
+        if (!email) {
+            alert('Digite um email')
+            return
+        }
+        if (!password) {
+            alert('Digite uma senha')
+            return
+        }
+        if (password.length < 6) {
+            alert('A senha deve ter mais de 6 caracteres')
+            return
+        }
+
+        console.log("Resgistrando - ", name, ' / ', email, ' / ', password)
+    }
+    else {
+        const email = (document.getElementById('email-input') as HTMLInputElement).value
+        const password = (document.getElementById('password-input') as HTMLInputElement).value
+
+        if (!email) {
+            alert('Digite um email')
+            return
+        }
+        if (!password) {
+            alert('Digite uma senha')
+            return
+        }
+        if (password.length < 6) {
+            alert('A senha deve ter mais de 6 caracteres')
+            return
+        }
+
+        console.log("Entrando - ", email, ' / ', password)
+    }
 }
 
 function renderElements(): void {
@@ -30,9 +69,9 @@ function renderElements(): void {
         inputsParent?.classList.add('register')
 
         inputsParent!.innerHTML = `
-            <input id="nameInput" type="text" placeholder="Nome" />
-            <input id="emailInput" type="text" placeholder="Email" />
-            <input id="passwordInput" type="password" placeholder="Senha" />
+            <input id="name-input" type="text" placeholder="Nome" />
+            <input id="email-input" type="text" placeholder="Email" />
+            <input id="password-input" type="password" placeholder="Senha" />
         `
 
         textNavigationButton!.innerHTML = `Já tem uma conta? <span>Entre agora</span>`
@@ -41,8 +80,8 @@ function renderElements(): void {
         inputsParent?.classList.add('login')
 
         inputsParent!.innerHTML = `
-            <input id="emailInput" type="text" placeholder="Email" />
-            <input id="passwordInput" type="password" placeholder="Senha" />
+            <input id="email-input" type="text" placeholder="Email" />
+            <input id="password-input" type="password" placeholder="Senha" />
         `
 
         textNavigationButton!.innerHTML = `Não tem uma conta? <span>Registre-se</span>`
