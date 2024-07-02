@@ -9,15 +9,10 @@ import { Server } from "socket.io";
 dotenv.config();
 const app = express();
 const httpServer = createServer(app)
-const io = new Server(httpServer, {
+export const io = new Server(httpServer, {
   cors: {
     origin: "http://localhost:5175"
   }
-})
-
-route.post("/update-favorites-length", async (req: Request, res: Response) => {
-  io.emit(req.body.userId, req.body.newLength)
-  res.status(200).json({})
 })
 
 app.use(express.json());
