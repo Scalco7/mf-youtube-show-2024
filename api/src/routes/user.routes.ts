@@ -1,10 +1,13 @@
 import { Router, Request, Response } from "express";
 import { UserController } from "../controllers/user.controller";
 import { User } from "../migrations/entities/user.entity";
+import { bearerAuthentication } from "../middleware/middleware";
 
 const userController = new UserController();
 
 export const userRoute = Router();
+
+userRoute.use("/", bearerAuthentication);
 
 userRoute.get("/", async (req: Request, res: Response) => {
   const users = await User.findAll();
