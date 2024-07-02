@@ -1,5 +1,11 @@
 import { verify } from "jsonwebtoken";
-import { ITokenData } from "../middleware/middleware";
+
+interface ITokenData {
+    id: string;
+    name: string;
+    iat: number;
+    exp: number;
+}
 
 export function getUserIdByToken(token: string): string {
     token = token.replace("Bearer ", "") ?? "";

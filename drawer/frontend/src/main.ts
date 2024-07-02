@@ -4,6 +4,7 @@ import "./styles/style.css";
 import { navigateTo, getRoute, getParams } from "./scripts/navigation";
 import { io } from "socket.io-client";
 import { jwtDecode } from "jwt-decode";
+import getFavoriteQuantity from "./scripts/api/getFavoriteQuantity";
 
 const favoriteNumberBox = document.getElementById('favorite-number-box')
 
@@ -36,6 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
     favoriteButton?.classList.add("current");
   }
 });
+
+getFavoriteQuantity().then((quantity) => {
+  favoriteNumberBox!.innerText = quantity.toString()
+})
 
 const socket = io('http://localhost:3040')
 socket.on(userId, handleNewFavoriteQuantity)
