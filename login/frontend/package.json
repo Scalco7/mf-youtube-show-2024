@@ -1,5 +1,5 @@
 {
-  "name": "main",
+  "name": "frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,11 +9,11 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@types/jwt-decode": "^3.1.0",
+    "@types/axios": "^0.14.0",
     "typescript": "^5.2.2",
     "vite": "^5.3.1"
   },
   "dependencies": {
-    "jwt-decode": "^4.0.0"
+    "axios": "^1.7.2"
   }
 }
