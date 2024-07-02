@@ -6,11 +6,38 @@ import './styles/style.css'
 const route = getRoute()
 const token = localStorage.getItem('token')
 
-if (!validateToken(token) && route != '/auth') {
-    navigateTo('/auth')
+console.log(route)
+
+if (!validateToken(token)) {
+    if (route == '/auth') {
+        renderAuthPage()
+    } else {
+        navigateTo('/auth')
+    }
+} else {
+    if (route == '/auth') {
+        navigateTo('/videos')
+    } else {
+        renderHomePage()
+    }
 }
 
-renderHomePage()
+function renderAuthPage() {
+    const authIframe: HTMLIFrameElement = document.createElement('iframe');
+    authIframe.src = `http://localhost:5174`;
+    authIframe.width = "100%";
+    authIframe.height = "100%";
+
+    const containerElement: HTMLElement | null = document.getElementById('app');
+    containerElement!.appendChild(authIframe);
+
+    //     window.addEventListener('message', (event) => {
+    //         const messageData = event.data;
+    //         if (messageData.action === 'changeRoute') {
+    //             navigateTo(messageData.route);
+    //         }
+    //     });
+}
 
 function renderHomePage() {
     const drawerIframe: HTMLIFrameElement = document.createElement('iframe');

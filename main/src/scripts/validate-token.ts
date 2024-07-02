@@ -1,10 +1,14 @@
-import { verify } from "jsonwebtoken";
+import { jwtDecode } from "jwt-decode";
 
 export default function validateToken(token: string | null): boolean {
     if (!token) return false
 
-    const decoded = verify(token, process.env.JWT_SECRET_KEY!.toString());
-    console.log(decoded)
-
-    return true
+    try {
+        console.log("aqui")
+        const decoded = jwtDecode(token);
+        console.log(decoded)
+        return true
+    } catch (error) {
+        return false
+    }
 }
