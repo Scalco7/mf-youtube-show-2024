@@ -97,6 +97,15 @@ button {
   transition: background-color ease-in-out 0.2s;
 }
 
+button:disabled {
+  background-color: #999999;
+  cursor: auto;
+}
+
+button:disabled:active {
+  background-color: #999999;
+}
+
 button:active {
   background-color: #c4302b;
   transition: background-color ease-in-out 0.2s;

@@ -8,7 +8,7 @@ const authController = new AuthController()
 let isRegister = false
 
 const inputsParent = document.getElementById('inputs-box')
-const formButton = document.getElementById('form-button')
+const formButton = document.getElementById('form-button') as HTMLButtonElement
 const textNavigationButton = document.getElementById('text-navigation-button')
 
 renderElements()
@@ -31,8 +31,6 @@ async function handleOnButtonClicked(): Promise<void> {
         await authController.registerUser(name, email, password)
     }
     else {
-        //add loading
-
         const email = (document.getElementById('email-input') as HTMLInputElement).value
         const password = (document.getElementById('password-input') as HTMLInputElement).value
 
@@ -41,6 +39,8 @@ async function handleOnButtonClicked(): Promise<void> {
 }
 
 function renderElements(): void {
+    formButton.disabled = true
+
     if (isRegister) {
         inputsParent?.classList.add('register')
 
@@ -52,6 +52,7 @@ function renderElements(): void {
 
         textNavigationButton!.innerHTML = `Já tem uma conta? <span>Entre agora</span>`
         formButton!.innerHTML = 'registrar'
+        formButton.disabled = false
     } else {
         inputsParent?.classList.add('login')
 
@@ -62,5 +63,6 @@ function renderElements(): void {
 
         textNavigationButton!.innerHTML = `Não tem uma conta? <span>Registre-se</span>`
         formButton!.innerHTML = 'entrar'
+        formButton.disabled = false
     }
 }
