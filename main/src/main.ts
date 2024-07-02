@@ -1,26 +1,36 @@
 import { getRoute, navigateTo } from './scripts/navigation';
+import validateToken from './scripts/validate-token';
 import './styles/reset.css'
 import './styles/style.css'
 
+const route = getRoute()
 const token = localStorage.getItem('token')
 
-const drawerIframe: HTMLIFrameElement = document.createElement('iframe');
-drawerIframe.src = `http://localhost:5175${getRoute()}?token=${token}`;
-drawerIframe.width = "250px";
-drawerIframe.height = "100%";
+if (!validateToken(token) && route != '/auth') {
+    navigateTo('/auth')
+}
 
-const videoIframe: HTMLIFrameElement = document.createElement('iframe');
-videoIframe.src = `http://localhost:5174${getRoute()}?token=${token}`;
-videoIframe.width = "100%";
-videoIframe.height = "100%";
+renderHomePage()
 
-const containerElement: HTMLElement | null = document.getElementById('app');
-containerElement!.appendChild(drawerIframe);
-containerElement!.appendChild(videoIframe);
+function renderHomePage() {
+    const drawerIframe: HTMLIFrameElement = document.createElement('iframe');
+    drawerIframe.src = `http://localhost:5175${route}?token=${token}`;
+    drawerIframe.width = "250px";
+    drawerIframe.height = "100%";
 
-window.addEventListener('message', (event) => {
-    const messageData = event.data;
-    if (messageData.action === 'changeRoute') {
-        navigateTo(messageData.route);
-    }
-});
+    const videoIframe: HTMLIFrameElement = document.createElement('iframe');
+    videoIframe.src = `http://localhost:5176${route}?token=${token}`;
+    videoIframe.width = "100%";
+    videoIframe.height = "100%";
+
+    const containerElement: HTMLElement | null = document.getElementById('app');
+    containerElement!.appendChild(drawerIframe);
+    containerElement!.appendChild(videoIframe);
+
+    window.addEventListener('message', (event) => {
+        const messageData = event.data;
+        if (messageData.action === 'changeRoute') {
+            navigateTo(messageData.route);
+        }
+    });
+}
