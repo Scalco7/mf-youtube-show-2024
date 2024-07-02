@@ -29,23 +29,29 @@ if (route == "/videos") {
   searchInput = document.getElementById("search-input") as HTMLInputElement
   searchInput?.addEventListener('change', () => searchVideos())
 
-  videosList = (await listVideosByTitle("")).videos
+  listVideosByTitle("").then((responseList) => {
+    videosList = responseList.videos
+    renderVideosList(videosList)
+  })
 }
 else if (route == "/favoritos") {
   headerSection!.innerHTML = `<h3>Favoritos</h3>`
-  videosList = (await listFavoriteVideos()).videos
+
+  listFavoriteVideos().then((responseList) => {
+    videosList = responseList.videos
+    renderVideosList(videosList)
+  })
 }
-
-
-renderVideosList(videosList)
 
 async function searchVideos(): Promise<void> {
   if (!searchInput) return
 
   const searchValue = searchInput.value
-  videosList = (await listVideosByTitle(searchValue)).videos
 
-  renderVideosList(videosList)
+  listVideosByTitle(searchValue).then((responseList) => {
+    videosList = responseList.videos
+    renderVideosList(videosList)
+  })
 }
 
 async function toogleFavoriteVideo(videoId: string): Promise<void> {
