@@ -1,7 +1,6 @@
 import { Request, Response, Router } from "express";
 import { Controller } from "../controllers/controller";
 import { bearerAuthentication } from "../middleware/middleware";
-import favoriteWebsocket, { webSocket } from "../server";
 
 const controller = new Controller();
 export const route = Router();
