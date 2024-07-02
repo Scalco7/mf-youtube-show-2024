@@ -11,5 +11,8 @@
   "devDependencies": {
     "typescript": "^5.2.2",
     "vite": "^5.3.1"
+  },
+  "dependencies": {
+    "socket.io-client": "^4.7.5"
   }
 }
