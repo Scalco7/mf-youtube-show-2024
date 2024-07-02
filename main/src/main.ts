@@ -6,8 +6,6 @@ import './styles/style.css'
 const route = getRoute()
 const token = localStorage.getItem('token')
 
-console.log(route)
-
 if (!validateToken(token)) {
     if (route == '/auth') {
         renderAuthPage()
@@ -31,12 +29,13 @@ function renderAuthPage() {
     const containerElement: HTMLElement | null = document.getElementById('app');
     containerElement!.appendChild(authIframe);
 
-    //     window.addEventListener('message', (event) => {
-    //         const messageData = event.data;
-    //         if (messageData.action === 'changeRoute') {
-    //             navigateTo(messageData.route);
-    //         }
-    //     });
+    window.addEventListener('message', (event) => {
+        const messageData = event.data;
+        if (messageData.action === 'onAuth') {
+            localStorage.setItem('token', messageData.token)
+            navigateTo('/videos');
+        }
+    });
 }
 
 function renderHomePage() {
