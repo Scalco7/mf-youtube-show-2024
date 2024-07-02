@@ -1,12 +1,12 @@
 import { Router, Request, Response } from "express"
-import { AuthService } from "../services/auth.service"
+import { AuthController } from "../controllers/auth.controller"
 
-const authService = new AuthService()
+const authController = new AuthController()
 export const authRoute = Router()
 
 authRoute.post("/login", async (req: Request, res: Response) => {
     try {
-        const token = await authService.login(req.body.email, req.body.password)
+        const token = await authController.login(req.body)
         res.status(200).json({ token: token })
     }
     catch (error) {
@@ -16,7 +16,7 @@ authRoute.post("/login", async (req: Request, res: Response) => {
 
 authRoute.post("/register", async (req: Request, res: Response) => {
     try {
-        const token = await authService.registerUser(req.body.name, req.body.email, req.body.password)
+        const token = await authController.registerUser(req.body)
         res.status(200).json({ token: token })
     }
     catch (error) {
