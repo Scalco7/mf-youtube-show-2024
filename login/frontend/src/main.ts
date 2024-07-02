@@ -1,5 +1,7 @@
 import './styles/reset.css'
+import './styles/toast.style.css'
 import './styles/style.css'
+import { showToast } from './scripts/toast/toast'
 
 let isRegister = false
 
@@ -25,19 +27,35 @@ function handleOnButtonClicked(): void {
         const password = (document.getElementById('password-input') as HTMLInputElement).value
 
         if (!name) {
-            alert('Digite um nome')
+            showToast({
+                message: 'Digite um nome',
+                variant: 'error',
+                duration: 2000
+            })
             return
         }
         if (!email) {
-            alert('Digite um email')
+            showToast({
+                message: 'Digite um email',
+                variant: 'error',
+                duration: 2000
+            })
             return
         }
         if (!password) {
-            alert('Digite uma senha')
+            showToast({
+                message: 'Digite uma senha',
+                variant: 'error',
+                duration: 2000
+            })
             return
         }
         if (password.length < 6) {
-            alert('A senha deve ter mais de 6 caracteres')
+            showToast({
+                message: 'A senha deve ter pelo menos 6 caracteres',
+                variant: 'error',
+                duration: 2000
+            })
             return
         }
 
@@ -48,15 +66,27 @@ function handleOnButtonClicked(): void {
         const password = (document.getElementById('password-input') as HTMLInputElement).value
 
         if (!email) {
-            alert('Digite um email')
+            showToast({
+                message: 'Digite um email',
+                variant: 'error',
+                duration: 2000
+            })
             return
         }
         if (!password) {
-            alert('Digite uma senha')
+            showToast({
+                message: 'Digite uma senha',
+                variant: 'error',
+                duration: 2000
+            })
             return
         }
         if (password.length < 6) {
-            alert('A senha deve ter mais de 6 caracteres')
+            showToast({
+                message: 'A senha deve ter pelo menos 6 caracteres',
+                variant: 'error',
+                duration: 2000
+            })
             return
         }
 
