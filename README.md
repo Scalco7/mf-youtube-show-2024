@@ -1,5 +1,17 @@
 # Teste iCasei: Front-End
 
+### Portas
+
+- Api :3030
+- Bff Drawer :3040
+- Bff Videos :3050
+- Bff Login :3060
+
+- Front main :5173
+- Front login :5174
+- Front drawer :5175
+- Front videos :5176
+
 Desenvolver uma aplicação HTML5.
 
 ## Instruções
