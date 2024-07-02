@@ -14,9 +14,13 @@ if (!validateToken(token)) {
     }
 } else {
     if (route == '/auth') {
-        navigateTo('/videos')
-    } else {
+        renderAuthPage()
+    }
+    else if (route == '/videos' || route == '/favoritos') {
         renderHomePage()
+    }
+    else {
+        navigateTo('/videos')
     }
 }
 
