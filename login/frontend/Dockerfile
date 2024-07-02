@@ -4,5 +4,5 @@ COPY . .
 RUN npm install
 RUN npm i -g serve
 RUN npm run build
-EXPOSE 4050
+EXPOSE 4040
 CMD ["npm", "run", "start"]
