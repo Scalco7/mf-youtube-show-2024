@@ -1,8 +1,16 @@
 import { compare } from "bcrypt";
 import { User } from "../migrations/entities/user.entity";
 import { sign } from "jsonwebtoken";
+import { UserService } from "./user.service";
 
 export class AuthService {
+  private userService: UserService
+
+  constructor() {
+    this.userService = new UserService()
+  }
+
+
   public async login(email: string, password: string): Promise<string> {
     let dbUserData;
 
@@ -21,6 +29,23 @@ export class AuthService {
 
     const token = sign(
       { id: dbUserData.id, name: dbUserData.name },
+      process.env.JWT_SECRET_KEY!.toString(),
+      { expiresIn: "6h" },
+    );
+    return token;
+  }
+
+  public async registerUser(name: string, email: string, password: string): Promise<string> {
+    let userData;
+
+    try {
+      userData = await this.userService.create(name, email, password)
+    } catch (error) {
+      throw error
+    }
+
+    const token = sign(
+      { id: userData.id, name: userData.name },
       process.env.JWT_SECRET_KEY!.toString(),
       { expiresIn: "6h" },
     );

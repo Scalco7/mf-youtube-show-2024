@@ -1,0 +1,139 @@
+:root {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  gap: 40px;
+}
+
+#form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  gap: 30px;
+}
+
+#box-data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+
+#inputs-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login {
+  gap: 45px;
+}
+
+.register {
+  gap: 35px;
+}
+
+input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #bfbfbf;
+  padding: 8px 2px;
+
+  font-size: 16px;
+  color: #757575;
+}
+
+input:focus {
+  box-shadow: none;
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid #c4302b;
+}
+
+input::placeholder {
+  font-size: 16px;
+  color: #999999;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+
+  span {
+    font-weight: 700;
+  }
+}
+
+button {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff0000;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+
+  font-family: "Rubik", sans-serif;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color ease-in-out 0.2s;
+}
+
+button:disabled {
+  background-color: #999999;
+  cursor: auto;
+}
+
+button:disabled:active {
+  background-color: #999999;
+}
+
+button:active {
+  background-color: #c4302b;
+  transition: background-color ease-in-out 0.2s;
+}
+
+#logo-svg {
+  width: 270px;
+}
+
+#ellipsis-svg {
+  position: absolute;
+  z-index: -1;
+  height: 80vh;
+  left: 0px;
+}
+
+#polygons-svg {
+  position: absolute;
+  z-index: -1;
+  width: 25vw;
+  bottom: 0px;
+  right: 0px;
+}
+
+#substract-svg {
+  position: absolute;
+  z-index: -1;
+  width: 20vw;
+  top: 0px;
+  right: 0px;
+}
