@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 import { userRoute } from './routes/user.routes';
 import { favoriteRoute } from './routes/favorite.routes';
 import { authRoute } from './routes/auth.routes';
+import cors from 'cors';
 
 dotenv.config()
 const app = express()
@@ -13,6 +14,7 @@ const route = Router()
 
 migrate()
 app.use(express.json())
+app.use(cors())
 
 app.use('/auth', authRoute)
 app.use('/users', userRoute)
