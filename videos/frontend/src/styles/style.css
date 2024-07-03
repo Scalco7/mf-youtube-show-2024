@@ -33,7 +33,7 @@ h3 {
 #video-list {
   position: relative;
   width: 100%;
-  height: max-content;
+  height: -webkit-fill-available;
   overflow: auto;
   display: flex;
   justify-content: center;
@@ -109,6 +109,7 @@ h3 {
 
   img {
     width: 100%;
+    height: 166.5px;
     object-fit: contain;
   }
 }
@@ -167,6 +168,10 @@ input:focus {
     height: 26px;
     cursor: pointer;
   }
+}
+
+.hidden {
+  display: none;
 }
 
 @media (min-width: 430px) {

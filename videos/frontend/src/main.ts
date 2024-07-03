@@ -1,15 +1,20 @@
+import './styles/reset.css'
+import './styles/style.css'
+import './styles/loader.css'
+
 import { favoriteVideo } from './scripts/api/favoriteVideo/favoriteVideo';
 import { listVideosByTitle } from './scripts/api/videos/listVideosByTitle'
 import { IVideoData } from './scripts/api/videos/interfaces';
 import { unfavoriteVideo } from './scripts/api/unfavoriteVideo/unfavoriteVideo';
 import { getParams, getRoute } from './scripts/utils/navigation';
-import './styles/reset.css'
-import './styles/style.css'
 import { listFavoriteVideos } from './scripts/api/videos/listFavoriteVideos';
 
 const videoListSection = document.getElementById("video-list")
 const headerSection = document.getElementById("header")
+const loadingElement = document.getElementById("loading")
 let searchInput: HTMLInputElement | undefined;
+
+startLoading()
 
 const route = getRoute();
 const params = getParams();
@@ -84,7 +89,7 @@ async function toogleFavoriteVideo(videoId: string): Promise<void> {
   }
 }
 
-function openVideo(videoId: string) {
+function openVideo(videoId: string): void {
   const url = `https://www.youtube.com/watch?v=${videoId}`
   window.open(url, '_blank')?.focus()
 }
@@ -125,6 +130,7 @@ function renderVideosList(videos: IVideoData[]): void {
   });
 
   videoListSection!.innerHTML = videoListHtml.join('')
+  videoListSection!.appendChild(loadingElement!)
   const videosHtml = document.getElementsByClassName('video-box')
 
   Object.keys(videosHtml).forEach((key: any) => {
@@ -135,4 +141,14 @@ function renderVideosList(videos: IVideoData[]): void {
       toogleFavoriteVideo(videosHtml[key].id)
     })
   });
+
+  stopLoading()
+}
+
+function startLoading(): void {
+  loadingElement?.classList.remove('hidden')
+}
+
+function stopLoading(): void {
+  loadingElement?.classList.add('hidden')
 }
