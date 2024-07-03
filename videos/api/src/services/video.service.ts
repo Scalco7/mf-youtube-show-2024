@@ -42,7 +42,7 @@ export class VideoService {
         videoId: videoId,
         title: video.snippet.title,
         description: video.snippet.description,
-        thumbnail: video.snippet.thumbnails.high,
+        thumbnail: video.snippet.thumbnails.medium,
         favorite: favoritesList.includes(videoId),
       }
     });
@@ -79,7 +79,7 @@ export class VideoService {
         videoId: videoId,
         title: video.snippet.title,
         description: video.snippet.description,
-        thumbnail: video.snippet.thumbnails.high,
+        thumbnail: video.snippet.thumbnails.medium,
         favorite: favoritesList.includes(videoId),
       }
     });
