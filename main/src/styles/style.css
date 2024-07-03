@@ -15,6 +15,7 @@ main {
   height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 #drawer-iframe {
@@ -64,6 +65,7 @@ header {
 
   main {
     flex-direction: row;
+    gap: 0px;
   }
 
   header {

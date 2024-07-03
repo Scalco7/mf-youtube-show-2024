@@ -26,7 +26,7 @@ export class VideoService {
     }
 
     try {
-      const maxResults = 2;
+      const maxResults = 12;
       const apiYtKey = process.env.YOUTUBE_API_KEY ?? '';
       const params = `search?part=snippet&type=video&q=${videoTitle}&maxResults=${maxResults}`;
 
