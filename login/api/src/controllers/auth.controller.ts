@@ -1,5 +1,5 @@
 import { AuthService } from "../services/auth.service";
-import { ILoginDataValidator, IRegisterDataValidator } from "../validators/auth.validators";
+import { loginDataValidator, registerDataValidator } from "../validators/auth.validators";
 
 interface ILoginData {
     email: string;
@@ -20,7 +20,7 @@ export class AuthController {
     }
 
     public async registerUser(data: IRegisterData): Promise<string> {
-        const { error } = IRegisterDataValidator.validate(data);
+        const { error } = registerDataValidator.validate(data);
 
         if (error) throw error.message;
 
@@ -29,7 +29,7 @@ export class AuthController {
     }
 
     public async login(data: ILoginData): Promise<string> {
-        const { error } = ILoginDataValidator.validate(data);
+        const { error } = loginDataValidator.validate(data);
 
         if (error) throw error.message;
 
