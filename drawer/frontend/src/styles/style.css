@@ -1,12 +1,6 @@
-:root {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  font-style: normal;
-}
-
 #app {
   width: 100%;
-  max-width: 300px;
+  max-width: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,4 +67,29 @@ button {
 
 .current {
   background: #ffcccc;
+}
+
+@media (min-width: 301px) {
+  #app {
+    padding: 5px;
+  }
+
+  section {
+    flex-direction: row;
+  }
+
+  button {
+    font-size: 18px;
+  }
+
+  #favorite-button {
+    justify-content: space-between;
+    padding: 0px 10px;
+  }
+
+  #favorite-number-box {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+  }
 }
