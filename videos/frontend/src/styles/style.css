@@ -11,15 +11,16 @@
   flex-direction: column;
   align-items: start;
   justify-content: start;
-  padding: 20px;
-  gap: 20px;
+  padding: 20px 5px;
+  gap: 30px;
   background: #ff3939;
   border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 h3 {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 400;
   color: white;
 }
 
@@ -29,6 +30,7 @@ h3 {
   height: max-content;
   overflow: auto;
   display: flex;
+  justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
   row-gap: 80px;
@@ -106,5 +108,16 @@ h3 {
 
   g path {
     stroke: #ffd400;
+  }
+}
+
+@media (min-width: 576px) {
+  #app {
+    border-top-right-radius: 0px;
+    padding: 20px;
+  }
+
+  #video-list {
+    justify-content: start;
   }
 }
