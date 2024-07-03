@@ -26,8 +26,9 @@ if (!validateToken(token)) {
 }
 
 function renderAuthPage() {
+    const authUrl = import.meta.env.VITE_LOGIN_URL
     const authIframe: HTMLIFrameElement = document.createElement('iframe');
-    authIframe.src = `http://localhost:4040`;
+    authIframe.src = authUrl;
     authIframe.width = "100%";
     authIframe.height = "100%";
 
@@ -56,12 +57,14 @@ function renderHomePage() {
 
 
     const drawerIframe: HTMLIFrameElement = document.createElement('iframe');
-    drawerIframe.src = `http://localhost:4050${route}?token=${token}`;
+    const drawerUrl = import.meta.env.VITE_DRAWER_URL
+    drawerIframe.src = `${drawerUrl}${route}?token=${token}`;
     drawerIframe.width = "400px";
     drawerIframe.height = "100%";
 
+    const videoUrl = import.meta.env.VITE_VIDEO_URL
     const videoIframe: HTMLIFrameElement = document.createElement('iframe');
-    videoIframe.src = `http://localhost:4060${route}?token=${token}`;
+    videoIframe.src = `${videoUrl}${route}?token=${token}`;
     videoIframe.width = "100%";
     videoIframe.height = "100%";
 
