@@ -95,8 +95,16 @@ function openVideo(videoId: string): void {
 }
 
 function renderVideosList(videos: IVideoData[]): void {
+  if (videos.length < 1) {
+    videoListSection!.innerHTML = `<p id="no-video-text">Sem vídeos</p>`
+    videoListSection!.appendChild(loadingElement!)
+    stopLoading()
+    return
+  }
+
   let videoListHtml: string[] = []
   videos.forEach((video: IVideoData) => {
+    console.log(video)
     const videoHtml = `
         <post class="video-box${video.favorite ? ' favorite-video' : ''}" id="${video.videoId}">
           <img src="${video.thumbnail.url}" />
