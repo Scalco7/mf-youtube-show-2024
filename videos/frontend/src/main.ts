@@ -32,18 +32,18 @@ if (route == "/videos") {
   searchInput = document.getElementById("search-input") as HTMLInputElement
   searchInput?.addEventListener('change', () => searchVideos())
 
-  // listVideosByTitle("").then((responseList) => {
-  //   videosList = responseList.videos
-  //   renderVideosList(videosList)
-  // })
+  listVideosByTitle("").then((responseList) => {
+    videosList = responseList.videos
+    renderVideosList(videosList)
+  })
 }
 else if (route == "/favoritos") {
   headerSection!.innerHTML = `<h3>Favoritos</h3>`
 
-  // listFavoriteVideos().then((responseList) => {
-  //   videosList = responseList.videos
-  //   renderVideosList(videosList)
-  // })
+  listFavoriteVideos().then((responseList) => {
+    videosList = responseList.videos
+    renderVideosList(videosList)
+  })
 }
 
 async function searchVideos(): Promise<void> {
