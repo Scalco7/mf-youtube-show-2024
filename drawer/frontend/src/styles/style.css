@@ -1,6 +1,11 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #app {
-  width: 100%;
-  max-width: 320px;
+  width: 95%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,16 +85,22 @@ button {
 
   button {
     font-size: 18px;
+    padding: 0px 5px;
   }
 
   #favorite-button {
     justify-content: space-between;
-    padding: 0px 10px;
   }
 
   #favorite-number-box {
     position: relative;
     width: fit-content;
     height: fit-content;
+  }
+}
+
+@media (min-width: 330px) {
+  button {
+    padding: 0px 10px;
   }
 }

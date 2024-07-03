@@ -27,6 +27,7 @@ h3 {
 #header {
   position: relative;
   display: flex;
+  width: 100%;
 }
 
 #video-list {
@@ -125,8 +126,13 @@ h3 {
   }
 }
 
+.search-input {
+  align-items: center;
+  justify-content: center;
+}
+
 input {
-  width: 350px;
+  width: 90%;
   background-color: transparent;
   border: none;
 
@@ -163,9 +169,14 @@ input:focus {
   }
 }
 
+@media (min-width: 430px) {
+  input {
+    width: 350px;
+  }
+}
+
 @media (min-width: 576px) {
   #app {
-    border-top-right-radius: 0px;
     padding: 20px;
   }
 

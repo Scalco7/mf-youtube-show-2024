@@ -21,6 +21,7 @@ if (token)
 let videosList: IVideoData[] = [];
 
 if (route == "/videos") {
+  headerSection?.classList.add('search-input')
   headerSection!.innerHTML = `
         <div id="input-box">
           <input id="search-input" type="text" autocomplete="off" placeholder="Pesquisar..." />
