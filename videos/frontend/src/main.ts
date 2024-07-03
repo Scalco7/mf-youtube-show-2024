@@ -122,6 +122,6 @@ function renderVideosList(videos: IVideoData[]): void {
   const videosHtml = document.getElementsByClassName('video-box')
 
   Object.keys(videosHtml).forEach((key: any) => {
-    videosHtml[key].children[0].addEventListener('click', () => toogleFavoriteVideo(videosHtml[key].id))
+    videosHtml[key].children[1].children[1].addEventListener('click', () => toogleFavoriteVideo(videosHtml[key].id))
   });
 }
