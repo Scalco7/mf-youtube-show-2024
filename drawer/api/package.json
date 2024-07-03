@@ -26,8 +26,11 @@
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.6",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.2"
   }
