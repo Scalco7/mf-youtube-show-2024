@@ -7,11 +7,12 @@ import { createServer } from 'http'
 import { Server } from "socket.io";
 
 dotenv.config();
+const PORT = process.env.PORT
 const app = express();
 const httpServer = createServer(app)
 export const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:5175"
+    origin: "*"
   }
 })
 
@@ -20,6 +21,6 @@ app.use(cors());
 
 app.use("/", route);
 
-httpServer.listen(process.env.PORT, () =>
-  console.log("heyy, api is listen on port: " + process.env.PORT),
+httpServer.listen(PORT, () =>
+  console.log("heyy, api is listen on port: " + PORT),
 );
