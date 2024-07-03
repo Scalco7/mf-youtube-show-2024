@@ -38,12 +38,13 @@ export class AuthService {
                     },
                 });
 
-
             if (request.data.error) throw request.data.error;
 
             return request.data.token
         } catch (error) {
-            throw (error as any).response.data.error;
+            if ((error as any).response.data.error)
+                throw (error as any).response.data.error;
+            throw error
         }
     }
 }

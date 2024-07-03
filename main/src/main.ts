@@ -14,15 +14,19 @@ if (!validateToken(token)) {
     }
 } else {
     if (route == '/auth') {
-        navigateTo('/videos')
-    } else {
+        renderAuthPage()
+    }
+    else if (route == '/videos' || route == '/favoritos') {
         renderHomePage()
+    }
+    else {
+        navigateTo('/videos')
     }
 }
 
 function renderAuthPage() {
     const authIframe: HTMLIFrameElement = document.createElement('iframe');
-    authIframe.src = `http://localhost:5174`;
+    authIframe.src = `http://localhost:4040`;
     authIframe.width = "100%";
     authIframe.height = "100%";
 
@@ -40,12 +44,12 @@ function renderAuthPage() {
 
 function renderHomePage() {
     const drawerIframe: HTMLIFrameElement = document.createElement('iframe');
-    drawerIframe.src = `http://localhost:5175${route}?token=${token}`;
+    drawerIframe.src = `http://localhost:4050${route}?token=${token}`;
     drawerIframe.width = "250px";
     drawerIframe.height = "100%";
 
     const videoIframe: HTMLIFrameElement = document.createElement('iframe');
-    videoIframe.src = `http://localhost:5176${route}?token=${token}`;
+    videoIframe.src = `http://localhost:4060${route}?token=${token}`;
     videoIframe.width = "100%";
     videoIframe.height = "100%";
 

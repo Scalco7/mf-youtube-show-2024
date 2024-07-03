@@ -42,7 +42,8 @@ getFavoriteQuantity().then((quantity) => {
   favoriteNumberBox!.innerText = quantity.toString()
 })
 
-const socket = io('http://localhost:3040')
+const apiUrl = import.meta.env.VITE_API_URL
+const socket = io(apiUrl)
 socket.on(userId, handleNewFavoriteQuantity)
 
 function handleNewFavoriteQuantity(newQuantity: number) {

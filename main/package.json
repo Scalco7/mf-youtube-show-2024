@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "serve -s dist -p 4030"
   },
   "devDependencies": {
     "@types/jwt-decode": "^3.1.0",
