@@ -58,9 +58,8 @@ function renderHomePage() {
 
     const drawerIframe: HTMLIFrameElement = document.createElement('iframe');
     const drawerUrl = import.meta.env.VITE_DRAWER_URL
+    drawerIframe.id = 'drawer-iframe'
     drawerIframe.src = `${drawerUrl}${route}?token=${token}`;
-    drawerIframe.width = "400px";
-    drawerIframe.height = "100%";
 
     const videoUrl = import.meta.env.VITE_VIDEO_URL
     const videoIframe: HTMLIFrameElement = document.createElement('iframe');

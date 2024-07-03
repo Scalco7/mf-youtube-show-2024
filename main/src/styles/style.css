@@ -17,11 +17,16 @@ main {
   flex-direction: column;
 }
 
+#drawer-iframe {
+  width: 100%;
+  height: 55px;
+}
+
 header {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 5px 50px;
 
@@ -38,7 +43,7 @@ header {
   }
 
   img {
-    width: 250px;
+    width: 200px;
     object-fit: contain;
   }
 }
@@ -61,7 +66,22 @@ header {
     flex-direction: row;
   }
 
-  header div {
-    display: flex;
+  header {
+    justify-content: space-between;
+
+    div {
+      display: flex;
+    }
+  }
+
+  #drawer-iframe {
+    width: 300px;
+    height: fit-content;
+  }
+}
+
+@media (min-width: 768px) {
+  header img {
+    width: 250px;
   }
 }
