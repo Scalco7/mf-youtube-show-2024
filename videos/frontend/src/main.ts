@@ -83,6 +83,11 @@ async function toogleFavoriteVideo(videoId: string): Promise<void> {
   }
 }
 
+function openVideo(videoId: string) {
+  const url = `https://www.youtube.com/watch?v=${videoId}`
+  window.open(url, '_blank')?.focus()
+}
+
 function renderVideosList(videos: IVideoData[]): void {
   let videoListHtml: string[] = []
   videos.forEach((video: IVideoData) => {
@@ -122,6 +127,11 @@ function renderVideosList(videos: IVideoData[]): void {
   const videosHtml = document.getElementsByClassName('video-box')
 
   Object.keys(videosHtml).forEach((key: any) => {
-    videosHtml[key].children[1].children[1].addEventListener('click', () => toogleFavoriteVideo(videosHtml[key].id))
+    videosHtml[key].addEventListener('click', () => openVideo(videosHtml[key].id))
+
+    videosHtml[key].children[1].children[1].addEventListener('click', (event) => {
+      event.stopImmediatePropagation()
+      toogleFavoriteVideo(videosHtml[key].id)
+    })
   });
 }

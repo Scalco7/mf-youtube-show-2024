@@ -40,6 +40,7 @@ h3 {
   flex-wrap: wrap;
   row-gap: 80px;
   column-gap: 120px;
+  padding: 20px 10px;
 }
 
 #video-list::-webkit-scrollbar-button {
@@ -71,6 +72,9 @@ h3 {
   border: 3px solid white;
   overflow: hidden;
   padding-bottom: 5px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: box-shadow 0.2s ease-in;
 
   .data-section {
     width: 100%;
@@ -106,6 +110,11 @@ h3 {
     width: 100%;
     object-fit: contain;
   }
+}
+
+.video-box:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: box-shadow 0.2s ease-in;
 }
 
 .favorite-video svg {
