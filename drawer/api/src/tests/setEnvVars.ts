@@ -1,0 +1,1 @@
+process.env.JWT_SECRET_KEY = '1aa9eb86-c942-431c-878a-c3f718d33e37'
