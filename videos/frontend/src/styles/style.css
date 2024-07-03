@@ -24,6 +24,11 @@ h3 {
   color: white;
 }
 
+#header {
+  position: relative;
+  display: flex;
+}
+
 #video-list {
   position: relative;
   width: 100%;
@@ -108,6 +113,44 @@ h3 {
 
   g path {
     stroke: #ffd400;
+  }
+}
+
+input {
+  width: 350px;
+  background-color: transparent;
+  border: none;
+
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+input:focus {
+  box-shadow: none;
+  outline: 0;
+  border: none;
+  background-color: transparent;
+}
+
+#input-box {
+  border: 3px solid white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+
+  svg {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
   }
 }
 

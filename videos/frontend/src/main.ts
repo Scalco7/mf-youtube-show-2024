@@ -22,9 +22,12 @@ let videosList: IVideoData[] = [];
 
 if (route == "/videos") {
   headerSection!.innerHTML = `
-        <label>
-          <input id="search-input" type="text" />
-        </label>`
+        <div id="input-box">
+          <input id="search-input" type="text" autocomplete="off" placeholder="Pesquisar..." />
+          <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21.1843 21.6732L29.75 30.25M24.0833 14.6667C24.0833 20.1435 19.6435 24.5833 14.1667 24.5833C8.68985 24.5833 4.25 20.1435 4.25 14.6667C4.25 9.18985 8.68985 4.75 14.1667 4.75C19.6435 4.75 24.0833 9.18985 24.0833 14.6667Z" stroke="white" stroke-width="5.33333" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>`
 
   searchInput = document.getElementById("search-input") as HTMLInputElement
   searchInput?.addEventListener('change', () => searchVideos())
