@@ -45,3 +45,33 @@ services:
       - YOUTUBE_API_KEY=AIzaSyD4FXC0LCndygpt0-jbVYr5LB1R7K-7vJg
       - API_KEY=0b26aee8-9dc9-4fc1-871c-3bc8bc0e47b6
       - API_URL=http://host.docker.internal:3030
+
+  mf_main:
+    build: ./main
+    ports:
+      - "4030:4030"
+    depends_on:
+      - mf_login
+      - mf_drawer
+      - mf_videos
+
+  mf_login:
+    build: ./login/frontend
+    ports:
+      - "4040:4040"
+    depends_on:
+      - bff_login
+
+  mf_drawer:
+    build: ./drawer/frontend
+    ports:
+      - "4050:4050"
+    depends_on:
+      - bff_drawer
+
+  mf_videos:
+    build: ./videos/frontend
+    ports:
+      - "4060:4060"
+    depends_on:
+      - bff_videos
