@@ -22,7 +22,7 @@ export class AuthController {
     public async registerUser(data: IRegisterData): Promise<string> {
         const { error } = registerDataValidator.validate(data);
 
-        if (error) throw error.message;
+        if (error) throw new Error(error.message);
 
         const token = await this.authService.registerUser(data.name, data.email, data.password)
         return token
@@ -31,7 +31,7 @@ export class AuthController {
     public async login(data: ILoginData): Promise<string> {
         const { error } = loginDataValidator.validate(data);
 
-        if (error) throw error.message;
+        if (error) throw new Error(error.message);
 
         const token = await this.authService.login(data.email, data.password)
         return token
