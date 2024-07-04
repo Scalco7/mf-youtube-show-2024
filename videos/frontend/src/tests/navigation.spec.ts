@@ -3,7 +3,7 @@ import { getParams, getRoute } from "../scripts/utils/navigation";
 const pathname = window.location.pathname
 const search = window.location.search
 
-describe('Nagiation', () => {
+describe('Navigation', () => {
     beforeAll(() => {
         Object.defineProperty(window, 'location', {
             value: {

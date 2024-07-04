@@ -14,7 +14,6 @@ const textNavigationButton = document.getElementById('text-navigation-button')
 renderElements()
 
 textNavigationButton?.addEventListener('click', () => handleOnNavigationButtonClicked())
-
 formButton?.addEventListener('click', () => handleOnButtonClicked())
 
 function handleOnNavigationButtonClicked(): void {

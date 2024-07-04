@@ -3,7 +3,7 @@ import { getRoute, navigateTo } from "../scripts/navigation"
 const href = window.location.href
 const pathname = window.location.pathname
 
-describe('Nagiation', () => {
+describe('Navigation', () => {
     beforeAll(() => {
         Object.defineProperty(window, 'location', {
             value: {
