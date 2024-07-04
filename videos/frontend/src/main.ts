@@ -19,6 +19,8 @@ startLoading()
 const route = getRoute();
 const params = getParams();
 const token = params.get('token')
+const videosByColumn = Math.floor((window.innerWidth + 50) / 420)
+
 let callApi = false
 let searchValue = ""
 let nextPageToken: string;
@@ -80,8 +82,9 @@ function listVideos(refresh: boolean) {
   if (!callApi) {
     callApi = true
     const nextPage = refresh ? undefined : nextPageToken
+    const resultsQuantity = videosByColumn * 4
 
-    listVideosByTitle(searchValue, nextPage).then((responseList) => {
+    listVideosByTitle(searchValue, resultsQuantity, nextPage).then((responseList) => {
       nextPageToken = responseList.nextPageToken
       videosList = refresh ? responseList.videos : [...videosList, ...responseList.videos]
       renderVideosList(videosList)
