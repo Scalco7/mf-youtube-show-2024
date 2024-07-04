@@ -1,4 +1,4 @@
-import { favoriteDataValidator, listFavoritesDataValidator } from "../validators/favorite.validators";
+import { favoriteDataValidator, listFavoritesDataValidator } from "../../validators/favorite.validators";
 
 describe("Favorite Validators", () => {
     describe("favoriteDataValidator", () => {

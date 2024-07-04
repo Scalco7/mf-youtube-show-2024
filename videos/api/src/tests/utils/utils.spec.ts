@@ -1,4 +1,4 @@
-import { getUserIdByToken } from "../utils/getUserIdByToken";
+import { getUserIdByToken } from "../../utils/getUserIdByToken";
 
 describe('Utils', () => {
     describe('GetUserById', () => {
