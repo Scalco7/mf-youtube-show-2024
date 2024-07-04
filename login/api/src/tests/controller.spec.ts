@@ -39,7 +39,7 @@ describe('Auth Controller', () => {
             const password = '123456'
 
             const authController = new AuthController();
-            await expect(() => authController.login({ email, password })).rejects.toThrow(`\"email\" must be a valid email`);
+            expect(async () => await authController.login({ email, password })).rejects.toThrow(`\"email\" must be a valid email`);
         });
 
         test('Should throw exception by password be invalid', async () => {
@@ -50,7 +50,7 @@ describe('Auth Controller', () => {
             const password = '123'
 
             const authController = new AuthController();
-            await expect(() => authController.login({ email, password })).rejects.toThrow(`\"password\" length must be at least 6 characters long`);
+            expect(async () => await authController.login({ email, password })).rejects.toThrow(`\"password\" length must be at least 6 characters long`);
         });
     })
 
@@ -82,7 +82,7 @@ describe('Auth Controller', () => {
             const password = '123456'
 
             const authController = new AuthController();
-            await expect(() => authController.registerUser({ name, email, password })).rejects.toThrow(`\"email\" must be a valid email`);
+            expect(async () => await authController.registerUser({ name, email, password })).rejects.toThrow(`\"email\" must be a valid email`);
         });
 
         test('Should throw exception by password be invalid', async () => {
@@ -94,7 +94,7 @@ describe('Auth Controller', () => {
             const password = '123'
 
             const authController = new AuthController();
-            await expect(() => authController.registerUser({ name, email, password })).rejects.toThrow(`\"password\" length must be at least 6 characters long`);
+            expect(async () => await authController.registerUser({ name, email, password })).rejects.toThrow(`\"password\" length must be at least 6 characters long`);
         });
     })
 });

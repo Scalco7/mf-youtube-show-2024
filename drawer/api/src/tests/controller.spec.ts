@@ -33,6 +33,6 @@ describe('Controller', () => {
 
         const userId = ""
         const controller = new Controller();
-        await expect(() => controller.countFavoritesByUserId({ userId })).rejects.toThrow(`'value' is not allowed to be empty`);
+        expect(async () => await controller.countFavoritesByUserId({ userId })).rejects.toThrow(`'value' is not allowed to be empty`);
     });
 });
