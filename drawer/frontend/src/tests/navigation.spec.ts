@@ -11,6 +11,12 @@ describe('Navigation', () => {
                 search: jest.fn(),
             }
         });
+
+        Object.defineProperty(window, 'parent', {
+            value: {
+                postMessage: jest.fn(),
+            }
+        })
     });
 
     afterAll(() => {
@@ -19,8 +25,11 @@ describe('Navigation', () => {
     });
 
     describe('navigateTo Function', () => {
+        afterEach(() => {
+            jest.clearAllMocks()
+        })
+
         test('Should post message for change route to favoritos', () => {
-            window.parent.postMessage = jest.fn()
             const route = '/favoritos'
             const mockResponse = { action: 'changeRoute', route: route }, param2 = "*";
 
@@ -31,7 +40,6 @@ describe('Navigation', () => {
         })
 
         test('Should post message for change route to videos', () => {
-            window.parent.postMessage = jest.fn()
             const route = '/videos'
             const mockResponse = { action: 'changeRoute', route: route }, param2 = "*";
 
