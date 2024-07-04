@@ -1,8 +1,8 @@
-import { jwtDecode } from 'jwt-decode';
 import { getRoute, navigateTo } from './scripts/navigation';
-import validateToken from './scripts/validate-token';
+import { getUserName, validateToken } from './scripts/token-utils';
 import './styles/reset.css'
 import './styles/style.css'
+
 
 const route = getRoute()
 const token = localStorage.getItem('token')
@@ -51,7 +51,7 @@ function renderHomePage() {
     const body = document.getElementsByTagName('body')[0]
     body.appendChild(subtractImg)
 
-    const userName = (jwtDecode(token ?? '') as any).name
+    const userName = getUserName(token)
     const headerElement: HTMLElement = document.createElement('header')
     headerElement.innerHTML = `
         <div>
