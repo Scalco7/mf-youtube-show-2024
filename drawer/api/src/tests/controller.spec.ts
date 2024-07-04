@@ -1,7 +1,6 @@
 import { Controller } from "../controllers/controller";
 import { Service } from "../services/service";
 
-
 jest.mock('../services/service', () => {
     const service = {
         countFavoritesByUserId: jest.fn(),
@@ -21,8 +20,8 @@ describe('Controller', () => {
         (service.countFavoritesByUserId as jest.MockedFunction<any>).mockResolvedValueOnce(11);
 
         const userId = "idMockedtest"
-        const employeesController = new Controller();
-        const response = await employeesController.countFavoritesByUserId({ userId });
+        const controller = new Controller();
+        const response = await controller.countFavoritesByUserId({ userId });
         expect(service.countFavoritesByUserId).toHaveBeenCalledTimes(1);
         expect(service.countFavoritesByUserId).toHaveBeenCalledWith(userId);
         expect(response).toBe(11);
@@ -33,7 +32,7 @@ describe('Controller', () => {
         (service.countFavoritesByUserId as jest.MockedFunction<any>).mockResolvedValueOnce(11);
 
         const userId = ""
-        const employeesController = new Controller();
-        await expect(() => employeesController.countFavoritesByUserId({ userId })).rejects.toThrow(`'value' is not allowed to be empty`);
+        const controller = new Controller();
+        await expect(() => controller.countFavoritesByUserId({ userId })).rejects.toThrow(`'value' is not allowed to be empty`);
     });
 });
