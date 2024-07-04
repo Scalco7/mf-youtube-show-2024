@@ -8,6 +8,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: start;
+  gap: 0px;
 }
 
 main {
@@ -29,7 +30,7 @@ header {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 5px 50px;
+  padding: 20px 80px;
 
   div {
     display: none;
@@ -38,8 +39,12 @@ header {
 
     p {
       font-family: "Poppins", sans-serif;
-      font-weight: 400;
-      font-size: 24px;
+      font-weight: 500;
+      font-size: 20px;
+
+      span {
+        font-weight: 700;
+      }
     }
   }
 
@@ -59,6 +64,10 @@ header {
 }
 
 @media (min-width: 576px) {
+  #app {
+    gap: 30px;
+  }
+
   #subtract-img {
     display: flex;
   }
@@ -79,11 +88,5 @@ header {
   #drawer-iframe {
     width: 300px;
     height: fit-content;
-  }
-}
-
-@media (min-width: 768px) {
-  header img {
-    width: 250px;
   }
 }

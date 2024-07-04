@@ -55,8 +55,8 @@ function renderHomePage() {
     const headerElement: HTMLElement = document.createElement('header')
     headerElement.innerHTML = `
         <div>
-          <p>Olá ${userName}</p>
-          <p>Vai assistir o que hoje?</p>
+          <p>Olá <span>${userName}</span>,</p>
+          <p>Confira seus vídeos <span>favoritos</span> abaixo</p>
         </div>
         <img id="logo-img" src="./logo-complete.svg" />
     `
