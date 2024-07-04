@@ -1,10 +1,11 @@
 import Joi from "joi";
 import { VideoService } from "../services/video.service";
-import { IListVideosResponse } from "../types/listVideosResponse";
+import { IListVideosResponse, IVideosData } from "../types/listVideosResponse";
 
 interface ISearchYoutubeVideosData {
   userId: string;
   videoTitle: string;
+  nextPageToken?: string;
 }
 
 export class VideosController {
@@ -16,7 +17,7 @@ export class VideosController {
 
   public async searchYoutubeVideos(
     data: ISearchYoutubeVideosData,
-  ): Promise<IListVideosResponse[]> {
+  ): Promise<IListVideosResponse> {
     try {
       Joi.assert(data.userId, Joi.string().required());
     } catch (error) {
@@ -26,11 +27,13 @@ export class VideosController {
     const videosList = await this.VideoService.searchYoutubeVideos(
       data.userId,
       data.videoTitle,
+      12,
+      data.nextPageToken,
     );
     return videosList;
   }
 
-  public async listFavoriteVideos(userId: string): Promise<IListVideosResponse[]> {
+  public async listFavoriteVideos(userId: string): Promise<IVideosData[]> {
     try {
       Joi.assert(userId, Joi.string().required());
     } catch (error) {
