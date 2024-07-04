@@ -1,6 +1,7 @@
 import { getRoute, navigateTo } from "../scripts/navigation"
 
 const href = window.location.href
+const pathname = window.location.pathname
 
 describe('Nagiation', () => {
     beforeAll(() => {
@@ -14,6 +15,7 @@ describe('Nagiation', () => {
 
     afterAll(() => {
         window.location.href = href;
+        window.location.pathname = pathname;
     });
 
     describe('navigateTo Function', () => {
