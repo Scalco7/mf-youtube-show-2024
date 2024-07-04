@@ -21,6 +21,7 @@ export class VideosController {
   ): Promise<IListVideosResponse> {
     try {
       Joi.assert(data.userId, Joi.string().required());
+      Joi.assert(data.resultsQuantity, Joi.number().integer().required().min(0))
     } catch (error) {
       throw error;
     }
@@ -38,6 +39,8 @@ export class VideosController {
     try {
       Joi.assert(userId, Joi.string().required());
     } catch (error) {
+      if ((error as any).message)
+        throw new Error((error as any).message)
       throw error;
     }
 
