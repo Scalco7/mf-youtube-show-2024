@@ -39,7 +39,7 @@ describe('Favorite Controller', () => {
 
             const userId = ""
             const controller = new FavoriteController();
-            expect(async () => await controller.listFavoriteVideosByUserId({ userId })).rejects.toThrow(`\"userId\" is not allowed to be empty`);
+            await expect(controller.listFavoriteVideosByUserId({ userId })).rejects.toThrow(`\"userId\" is not allowed to be empty`);
         });
     })
 
@@ -69,7 +69,7 @@ describe('Favorite Controller', () => {
             const videoId = ""
 
             const controller = new FavoriteController();
-            expect(async () => await controller.addFavoriteVideo({ userId, videoId })).rejects.toThrow(`\"videoId\" is not allowed to be empty`);
+            await expect(controller.addFavoriteVideo({ userId, videoId })).rejects.toThrow(`\"videoId\" is not allowed to be empty`);
         });
 
         test('Should throw exception by userId be empty', async () => {
@@ -80,7 +80,7 @@ describe('Favorite Controller', () => {
             const videoId = "idVideoMockedTest"
 
             const controller = new FavoriteController();
-            expect(async () => await controller.addFavoriteVideo({ userId, videoId })).rejects.toThrow(`\"userId\" is not allowed to be empty`);
+            await expect(controller.addFavoriteVideo({ userId, videoId })).rejects.toThrow(`\"userId\" is not allowed to be empty`);
         });
     })
 
@@ -110,7 +110,7 @@ describe('Favorite Controller', () => {
             const videoId = ""
 
             const controller = new FavoriteController();
-            expect(async () => await controller.removeFavoriteVideo({ userId, videoId })).rejects.toThrow(`\"videoId\" is not allowed to be empty`);
+            await expect(controller.removeFavoriteVideo({ userId, videoId })).rejects.toThrow(`\"videoId\" is not allowed to be empty`);
         });
 
         test('Should throw exception by userId be empty', async () => {
@@ -121,7 +121,7 @@ describe('Favorite Controller', () => {
             const videoId = "idVideoMockedTest"
 
             const controller = new FavoriteController();
-            expect(async () => await controller.removeFavoriteVideo({ userId, videoId })).rejects.toThrow(`\"userId\" is not allowed to be empty`);
+            await expect(controller.removeFavoriteVideo({ userId, videoId })).rejects.toThrow(`\"userId\" is not allowed to be empty`);
         });
     })
 });
