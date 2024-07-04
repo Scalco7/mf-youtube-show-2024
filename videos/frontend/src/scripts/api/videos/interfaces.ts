@@ -1,4 +1,5 @@
 export interface IListVideosResponse {
+    nextPageToken: string
     videos: IVideoData[]
 }
 

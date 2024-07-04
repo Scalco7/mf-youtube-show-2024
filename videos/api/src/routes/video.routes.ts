@@ -13,8 +13,16 @@ videoRoute.get("/list/", async (req: Request, res: Response) => {
   try {
     const userId = getUserIdByToken(req.header("Authorization") ?? '')
     const videoTitle = req.query.title as string;
-    const videos = await videoController.searchYoutubeVideos({ userId, videoTitle });
-    res.status(200).json({ videos: videos });
+    const nextPageToken = req.query.nextPageToken as string | undefined;
+    const resultsQuantity = req.query.resultsQuantity as string;
+    const data = {
+      userId,
+      resultsQuantity: Number(resultsQuantity) ?? 0,
+      videoTitle,
+      nextPageToken
+    }
+    const videos = await videoController.searchYoutubeVideos(data);
+    res.status(200).json(videos);
   } catch (error) {
     res.status(400).json({ error: error });
   }
