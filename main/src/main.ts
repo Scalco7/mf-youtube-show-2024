@@ -45,6 +45,12 @@ function renderAuthPage() {
 }
 
 function renderHomePage() {
+    const subtractImg: HTMLImageElement = document.createElement('img')
+    subtractImg.id = 'subtract-img'
+    subtractImg.src = './subtract.svg'
+    const body = document.getElementsByTagName('body')[0]
+    body.appendChild(subtractImg)
+
     const userName = (jwtDecode(token ?? '') as any).name
     const headerElement: HTMLElement = document.createElement('header')
     headerElement.innerHTML = `
@@ -54,7 +60,6 @@ function renderHomePage() {
         </div>
         <img id="logo-img" src="./logo-complete.svg" />
     `
-
 
     const drawerIframe: HTMLIFrameElement = document.createElement('iframe');
     const drawerUrl = import.meta.env.VITE_DRAWER_URL
