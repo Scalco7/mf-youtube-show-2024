@@ -2,8 +2,24 @@
   "name": "my-tube",
   "version": "1.0.0",
   "scripts": {
-    "install:api": "",
-    "install:": ""
+    "install:api": "cd ./api && npm install",
+    "test:api": "cd ./api && npm test",
+    "install:bff-login": "cd ./login/backend && npm install",
+    "test:bff-login": "cd ./login/backend && npm test",
+    "install:bff-drawer": "cd ./drawer/backend && npm install",
+    "test:bff-drawer": "cd ./drawer/backend && npm test",
+    "install:bff-videos": "cd ./videos/backend && npm install",
+    "test:bff-videos": "cd ./videos/backend && npm test",
+    "install:main": "cd ./main && npm install",
+    "test:main": "cd ./main && npm test",
+    "install:mf-login": "cd ./login/frontend && npm install",
+    "test:mf-login": "cd ./login/frontend && npm test",
+    "install:mf-drawer": "cd ./drawer/frontend && npm install",
+    "test:mf-drawer": "cd ./drawer/frontend && npm test",
+    "install:mf-videos": "cd ./videos/frontend && npm install",
+    "test:mf-videos": "cd ./videos/frontend && npm test",
+    "install:all": "concurrently \"npm run install:api\" \"npm run install:bff-login\" \"npm run install:bff-drawer\" \"npm run install:bff-videos\" \"npm run install:main\" \"npm run install:mf-login\" \"npm run install:mf-drawer\" \"npm run install:mf-videos\"",
+    "test:all": "concurrently \"npm run test:api\" \"npm run test:bff-login\" \"npm run test:bff-drawer\" \"npm run test:bff-videos\" \"npm run test:main\" \"npm run test:mf-login\" \"npm run test:mf-drawer\" \"npm run test:mf-videos\""
   },
   "author": "Felipe Maciel Scalco",
   "license": "ISC"
