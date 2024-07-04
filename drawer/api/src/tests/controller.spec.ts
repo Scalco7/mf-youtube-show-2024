@@ -28,9 +28,6 @@ describe('Controller', () => {
     });
 
     test('Should throw exception by userId be empty', async () => {
-        const service = new Service();
-        (service.countFavoritesByUserId as jest.MockedFunction<any>).mockResolvedValueOnce(11);
-
         const userId = ""
         const controller = new Controller();
         expect(async () => await controller.countFavoritesByUserId({ userId })).rejects.toThrow(`'value' is not allowed to be empty`);

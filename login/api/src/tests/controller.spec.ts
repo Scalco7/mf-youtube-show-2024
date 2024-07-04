@@ -32,9 +32,6 @@ describe('Auth Controller', () => {
         });
 
         test('Should throw exception by email be invalid', async () => {
-            const authService = new AuthService();
-            (authService.login as jest.MockedFunction<any>).mockResolvedValueOnce('tokenJWT');
-
             const email = "test.com"
             const password = '123456'
 
@@ -43,9 +40,6 @@ describe('Auth Controller', () => {
         });
 
         test('Should throw exception by password be invalid', async () => {
-            const authService = new AuthService();
-            (authService.login as jest.MockedFunction<any>).mockResolvedValueOnce('tokenJWT');
-
             const email = "test@gmail.com"
             const password = '123'
 
@@ -74,9 +68,6 @@ describe('Auth Controller', () => {
         });
 
         test('Should throw exception by email be invalid', async () => {
-            const authService = new AuthService();
-            (authService.registerUser as jest.MockedFunction<any>).mockResolvedValueOnce('tokenJWT');
-
             const name = "Name teste"
             const email = "test.com"
             const password = '123456'
@@ -86,9 +77,6 @@ describe('Auth Controller', () => {
         });
 
         test('Should throw exception by password be invalid', async () => {
-            const authService = new AuthService();
-            (authService.registerUser as jest.MockedFunction<any>).mockResolvedValueOnce('tokenJWT');
-
             const name = "Name teste"
             const email = "test@gmail.com"
             const password = '123'

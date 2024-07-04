@@ -33,10 +33,6 @@ describe('Favorite Controller', () => {
         });
 
         test('Should throw exception by userId be empty', async () => {
-            const responseMock = ['id-videos-1', 'id-videos-2', 'id-videos-3', 'id-videos-4']
-            const service = new FavoriteService();
-            (service.listFavoriteVideosByUserId as jest.MockedFunction<any>).mockResolvedValueOnce(responseMock);
-
             const userId = ""
             const controller = new FavoriteController();
             await expect(controller.listFavoriteVideosByUserId({ userId })).rejects.toThrow(`\"userId\" is not allowed to be empty`);
@@ -62,9 +58,6 @@ describe('Favorite Controller', () => {
         });
 
         test('Should throw exception by videoId be empty', async () => {
-            const service = new FavoriteService();
-            (service.addFavoriteVideo as jest.MockedFunction<any>).mockResolvedValueOnce();
-
             const userId = "idMockedtest"
             const videoId = ""
 
@@ -73,9 +66,6 @@ describe('Favorite Controller', () => {
         });
 
         test('Should throw exception by userId be empty', async () => {
-            const service = new FavoriteService();
-            (service.addFavoriteVideo as jest.MockedFunction<any>).mockResolvedValueOnce();
-
             const userId = ""
             const videoId = "idVideoMockedTest"
 
@@ -103,9 +93,6 @@ describe('Favorite Controller', () => {
         });
 
         test('Should throw exception by videoId be empty', async () => {
-            const service = new FavoriteService();
-            (service.removeFavoriteVideo as jest.MockedFunction<any>).mockResolvedValueOnce();
-
             const userId = "idMockedtest"
             const videoId = ""
 
@@ -114,9 +101,6 @@ describe('Favorite Controller', () => {
         });
 
         test('Should throw exception by userId be empty', async () => {
-            const service = new FavoriteService();
-            (service.removeFavoriteVideo as jest.MockedFunction<any>).mockResolvedValueOnce();
-
             const userId = ""
             const videoId = "idVideoMockedTest"
 
