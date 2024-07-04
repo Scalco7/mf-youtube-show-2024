@@ -9,9 +9,9 @@ import { unfavoriteVideo } from './scripts/api/unfavoriteVideo/unfavoriteVideo';
 import { getParams, getRoute } from './scripts/utils/navigation';
 import { listFavoriteVideos } from './scripts/api/videos/listFavoriteVideos';
 
-const videoListSection = document.getElementById("video-list")
-const headerSection = document.getElementById("header")
-const loadingElement = document.getElementById("loading")
+const videoListSection: HTMLElement | null = document.getElementById("video-list")
+const headerSection: HTMLElement | null = document.getElementById("header")
+const loadingElement: HTMLElement | null = document.getElementById("loading")
 let searchInput: HTMLInputElement | undefined;
 
 startLoading()
@@ -19,6 +19,8 @@ startLoading()
 const route = getRoute();
 const params = getParams();
 const token = params.get('token')
+let callApi = false
+let searchValue = ""
 
 if (token)
   localStorage.setItem('token', token)
@@ -37,30 +39,51 @@ if (route == "/videos") {
 
   searchInput = document.getElementById("search-input") as HTMLInputElement
   searchInput?.addEventListener('change', () => searchVideos())
+  videoListSection?.addEventListener('scroll', () => { onScrollVideos() })
 
-  listVideosByTitle("").then((responseList) => {
-    videosList = responseList.videos
-    renderVideosList(videosList)
-  })
+  listVideos(true)
 }
 else if (route == "/favoritos") {
   headerSection!.innerHTML = `<h3>Favoritos</h3>`
 
-  listFavoriteVideos().then((responseList) => {
-    videosList = responseList.videos
-    renderVideosList(videosList)
-  })
+  if (!callApi) {
+    callApi = true
+    listFavoriteVideos().then((responseList) => {
+      videosList = responseList.videos
+      renderVideosList(videosList)
+      callApi = false
+    })
+  }
 }
 
-async function searchVideos(): Promise<void> {
+function onScrollVideos(): void {
+  if (!videoListSection)
+    return
+
+  const height = videoListSection.scrollHeight - videoListSection.offsetHeight
+  const scrollPosition = videoListSection.scrollTop
+
+  if (scrollPosition > height - 300 && !callApi) {
+    listVideos(false)
+  }
+}
+
+function searchVideos(): void {
   if (!searchInput) return
 
-  const searchValue = searchInput.value
+  searchValue = searchInput.value
+  listVideos(true)
+}
 
-  listVideosByTitle(searchValue).then((responseList) => {
-    videosList = responseList.videos
-    renderVideosList(videosList)
-  })
+function listVideos(refresh: boolean) {
+  if (!callApi) {
+    callApi = true
+    listVideosByTitle(searchValue).then((responseList) => {
+      videosList = refresh ? responseList.videos : [...responseList.videos, ...videosList]
+      renderVideosList(videosList)
+      callApi = false
+    })
+  }
 }
 
 async function toogleFavoriteVideo(videoId: string): Promise<void> {
@@ -104,7 +127,6 @@ function renderVideosList(videos: IVideoData[]): void {
 
   let videoListHtml: string[] = []
   videos.forEach((video: IVideoData) => {
-    console.log(video)
     const videoHtml = `
         <post class="video-box${video.favorite ? ' favorite-video' : ''}" id="${video.videoId}">
           <img src="${video.thumbnail.url}" />
