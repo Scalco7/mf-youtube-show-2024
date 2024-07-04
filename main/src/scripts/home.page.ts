@@ -5,8 +5,6 @@ export default function renderHomePage(userToken: string, appRoute: string) {
     const subtractImg: HTMLImageElement = document.createElement('img')
     subtractImg.id = 'subtract-img'
     subtractImg.src = './subtract.svg'
-    // const body = document.getElementsByTagName('body')[0]
-    // body.appendChild(subtractImg)
 
     const userName = getUserName(userToken)
     const headerElement: HTMLElement = document.createElement('header')
