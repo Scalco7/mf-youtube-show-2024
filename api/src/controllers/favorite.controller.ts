@@ -20,7 +20,7 @@ export class FavoriteController {
   public async addFavoriteVideo(data: IFavoriteVideoData): Promise<Favorite> {
     const { error } = favoriteDataValidator.validate(data);
 
-    if (error) throw error.message;
+    if (error) throw new Error(error.message);
 
     const favorite = await this.favoriteService.addFavoriteVideo(
       data.userId,
@@ -32,7 +32,7 @@ export class FavoriteController {
   public async removeFavoriteVideo(data: IFavoriteVideoData): Promise<void> {
     const { error } = favoriteDataValidator.validate(data);
 
-    if (error) throw error.message;
+    if (error) throw new Error(error.message);
 
     await this.favoriteService.removeFavoriteVideo(data.userId, data.videoId);
   }
@@ -42,7 +42,7 @@ export class FavoriteController {
   }): Promise<string[]> {
     const { error } = listFavoritesDataValidator.validate(data);
 
-    if (error) throw error.message;
+    if (error) throw new Error(error.message);
 
     const favoriteList = await this.favoriteService.listFavoriteByUserId(
       data.userId,

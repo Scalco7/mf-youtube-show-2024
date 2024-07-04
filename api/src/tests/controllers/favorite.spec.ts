@@ -3,7 +3,7 @@ import { FavoriteService } from "../../services/favorite.service";
 
 jest.mock('../../services/favorite.service', () => {
     const service = {
-        listFavoriteVideosByUserId: jest.fn(),
+        listFavoriteByUserId: jest.fn(),
         addFavoriteVideo: jest.fn(),
         removeFavoriteVideo: jest.fn(),
     };
@@ -15,7 +15,7 @@ describe('Favorite Controller', () => {
         jest.resetAllMocks()
     })
 
-    describe('listFavoriteVideosByUserId Function', () => {
+    describe('listFavoriteByUserId Function', () => {
         afterEach(() => {
             jest.clearAllMocks()
         });
