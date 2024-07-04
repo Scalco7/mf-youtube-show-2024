@@ -11,7 +11,7 @@ services:
       - DRAWER_API_URL=http://host.docker.internal:3050
 
   bff_login:
-    build: ./login/api
+    build: ./login/backend
     ports:
       - "3040:3040"
     depends_on:
@@ -22,7 +22,7 @@ services:
       - API_URL=http://host.docker.internal:3030
 
   bff_drawer:
-    build: ./drawer/api
+    build: ./drawer/backend
     ports:
       - "3050:3050"
     depends_on:
@@ -34,7 +34,7 @@ services:
       - API_URL=http://host.docker.internal:3030
 
   bff_videos:
-    build: ./videos/api
+    build: ./videos/backend
     ports:
       - "3060:3060"
     depends_on:
