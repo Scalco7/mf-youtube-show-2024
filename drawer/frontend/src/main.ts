@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 import { jwtDecode } from "jwt-decode";
 import getFavoriteQuantity from "./scripts/api/getFavoriteQuantity";
 
-const favoriteNumberBox = document.getElementById('favorite-number-box')
+const favoriteNumberBox = document.getElementById('favorite-number-circle')
 
 const params = getParams();
 const token = params.get('token')

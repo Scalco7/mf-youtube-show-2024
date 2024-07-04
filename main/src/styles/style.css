@@ -1,7 +1,89 @@
+body {
+  position: relative;
+}
+
 #app {
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: start;
+}
+
+main {
+  width: 100%;
+  height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#drawer-iframe {
+  width: 100%;
+  height: 55px;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 50px;
+
+  div {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+
+    p {
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      font-size: 24px;
+    }
+  }
+
+  img {
+    width: 200px;
+    object-fit: contain;
+  }
+}
+
+#subtract-img {
+  display: none;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  z-index: -1;
+  height: 45vh;
+}
+
+@media (min-width: 576px) {
+  #subtract-img {
+    display: flex;
+  }
+
+  main {
+    flex-direction: row;
+    gap: 0px;
+  }
+
+  header {
+    justify-content: space-between;
+
+    div {
+      display: flex;
+    }
+  }
+
+  #drawer-iframe {
+    width: 300px;
+    height: fit-content;
+  }
+}
+
+@media (min-width: 768px) {
+  header img {
+    width: 250px;
+  }
 }

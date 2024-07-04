@@ -1,3 +1,4 @@
+import { jwtDecode } from 'jwt-decode';
 import { getRoute, navigateTo } from './scripts/navigation';
 import validateToken from './scripts/validate-token';
 import './styles/reset.css'
@@ -25,8 +26,9 @@ if (!validateToken(token)) {
 }
 
 function renderAuthPage() {
+    const authUrl = import.meta.env.VITE_LOGIN_URL
     const authIframe: HTMLIFrameElement = document.createElement('iframe');
-    authIframe.src = `http://localhost:4040`;
+    authIframe.src = authUrl;
     authIframe.width = "100%";
     authIframe.height = "100%";
 
@@ -43,19 +45,40 @@ function renderAuthPage() {
 }
 
 function renderHomePage() {
-    const drawerIframe: HTMLIFrameElement = document.createElement('iframe');
-    drawerIframe.src = `http://localhost:4050${route}?token=${token}`;
-    drawerIframe.width = "250px";
-    drawerIframe.height = "100%";
+    const subtractImg: HTMLImageElement = document.createElement('img')
+    subtractImg.id = 'subtract-img'
+    subtractImg.src = './subtract.svg'
+    const body = document.getElementsByTagName('body')[0]
+    body.appendChild(subtractImg)
 
+    const userName = (jwtDecode(token ?? '') as any).name
+    const headerElement: HTMLElement = document.createElement('header')
+    headerElement.innerHTML = `
+        <div>
+          <p>Olá ${userName}</p>
+          <p>Vai assistir o que hoje?</p>
+        </div>
+        <img id="logo-img" src="./logo-complete.svg" />
+    `
+
+    const drawerIframe: HTMLIFrameElement = document.createElement('iframe');
+    const drawerUrl = import.meta.env.VITE_DRAWER_URL
+    drawerIframe.id = 'drawer-iframe'
+    drawerIframe.src = `${drawerUrl}${route}?token=${token}`;
+
+    const videoUrl = import.meta.env.VITE_VIDEO_URL
     const videoIframe: HTMLIFrameElement = document.createElement('iframe');
-    videoIframe.src = `http://localhost:4060${route}?token=${token}`;
+    videoIframe.src = `${videoUrl}${route}?token=${token}`;
     videoIframe.width = "100%";
     videoIframe.height = "100%";
 
-    const containerElement: HTMLElement | null = document.getElementById('app');
+    const containerElement: HTMLElement = document.createElement('main');
     containerElement!.appendChild(drawerIframe);
     containerElement!.appendChild(videoIframe);
+
+    const appElement: HTMLElement | null = document.getElementById('app');
+    appElement!.appendChild(headerElement);
+    appElement!.appendChild(containerElement);
 
     window.addEventListener('message', (event) => {
         const messageData = event.data;
