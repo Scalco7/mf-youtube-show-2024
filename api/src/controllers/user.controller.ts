@@ -18,7 +18,7 @@ export class UserController {
   public async createUser(user: ICreateUserData): Promise<User> {
     const { error } = userDataValidator.validate(user);
 
-    if (error) throw error.message;
+    if (error) throw new Error(error.message);
 
     const newUser = await this.userService.create(
       user.name,
