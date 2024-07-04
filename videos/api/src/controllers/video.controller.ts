@@ -5,6 +5,7 @@ import { IListVideosResponse, IVideosData } from "../types/listVideosResponse";
 interface ISearchYoutubeVideosData {
   userId: string;
   videoTitle: string;
+  resultsQuantity: number;
   nextPageToken?: string;
 }
 
@@ -27,7 +28,7 @@ export class VideosController {
     const videosList = await this.VideoService.searchYoutubeVideos(
       data.userId,
       data.videoTitle,
-      12,
+      data.resultsQuantity,
       data.nextPageToken,
     );
     return videosList;
