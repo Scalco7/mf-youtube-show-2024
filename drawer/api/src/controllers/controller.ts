@@ -18,7 +18,9 @@ export class Controller {
     try {
       Joi.assert(data.userId, Joi.string().required());
     } catch (error) {
-      throw error;
+      if ((error as any).details[0].message)
+        throw new Error((error as any).details[0].message.replaceAll('"', "'"))
+      throw new Error(error as string);
     }
 
     const count = await this.service.countFavoritesByUserId(data.userId);
