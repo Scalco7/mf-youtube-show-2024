@@ -21,6 +21,7 @@ const params = getParams();
 const token = params.get('token')
 let callApi = false
 let searchValue = ""
+let nextPageToken: string;
 
 if (token)
   localStorage.setItem('token', token)
@@ -78,8 +79,11 @@ function searchVideos(): void {
 function listVideos(refresh: boolean) {
   if (!callApi) {
     callApi = true
-    listVideosByTitle(searchValue).then((responseList) => {
-      videosList = refresh ? responseList.videos : [...responseList.videos, ...videosList]
+    const nextPage = refresh ? undefined : nextPageToken
+
+    listVideosByTitle(searchValue, nextPage).then((responseList) => {
+      nextPageToken = responseList.nextPageToken
+      videosList = refresh ? responseList.videos : [...videosList, ...responseList.videos]
       renderVideosList(videosList)
       callApi = false
     })
