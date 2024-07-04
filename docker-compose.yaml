@@ -11,7 +11,7 @@ services:
       - DRAWER_API_URL=http://host.docker.internal:3050
 
   bff_login:
-    build: ./login/backend
+    build: ./auth/backend
     ports:
       - "3040:3040"
     depends_on:
@@ -42,8 +42,8 @@ services:
     environment:
       - PORT=3060
       - JWT_SECRET_KEY=1aa9eb86-c942-431c-878a-c3f718d33e37
-      # - YOUTUBE_API_KEY=AIzaSyD4FXC0LCndygpt0-jbVYr5LB1R7K-7vJg
-      - YOUTUBE_API_KEY=AIzaSyBRVoy99TklRvNtQ-b_iEynjqUEF2dbqfU
+      - YOUTUBE_API_KEY=AIzaSyD4FXC0LCndygpt0-jbVYr5LB1R7K-7vJg
+      #- YOUTUBE_API_KEY=AIzaSyBRVoy99TklRvNtQ-b_iEynjqUEF2dbqfU
       - API_KEY=0b26aee8-9dc9-4fc1-871c-3bc8bc0e47b6
       - API_URL=http://host.docker.internal:3030
 
@@ -57,7 +57,7 @@ services:
       - mf_videos
 
   mf_login:
-    build: ./login/frontend
+    build: ./auth/frontend
     ports:
       - "4040:4040"
     depends_on:
