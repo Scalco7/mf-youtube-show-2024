@@ -4,16 +4,20 @@ services:
     build: ./api
     ports:
       - "3030:3030"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - PORT=3030
       - JWT_SECRET_KEY=1aa9eb86-c942-431c-878a-c3f718d33e37
       - ACCESS_API_KEY=0b26aee8-9dc9-4fc1-871c-3bc8bc0e47b6
       - DRAWER_API_URL=http://host.docker.internal:3050
 
-  bff_login:
+  bff_auth:
     build: ./auth/backend
     ports:
       - "3040:3040"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - main_api
     environment:
@@ -25,6 +29,8 @@ services:
     build: ./drawer/backend
     ports:
       - "3050:3050"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - main_api
     environment:
@@ -37,6 +43,8 @@ services:
     build: ./videos/backend
     ports:
       - "3060:3060"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - main_api
     environment:
@@ -51,22 +59,28 @@ services:
     build: ./main
     ports:
       - "4030:4030"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
-      - mf_login
+      - mf_auth
       - mf_drawer
       - mf_videos
 
-  mf_login:
+  mf_auth:
     build: ./auth/frontend
     ports:
       - "4040:4040"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
-      - bff_login
+      - bff_auth
 
   mf_drawer:
     build: ./drawer/frontend
     ports:
       - "4050:4050"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - bff_drawer
 
@@ -74,5 +88,7 @@ services:
     build: ./videos/frontend
     ports:
       - "4060:4060"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - bff_videos
